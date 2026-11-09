@@ -1,0 +1,13 @@
+{
+  "name": "travels",
+  "version": "1.0.0",
+  "description": "교영 & 주영의 여행 노트 — 여행 계획과 실전 가이드",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.156.1"
+  }
+}
