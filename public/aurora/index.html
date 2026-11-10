@@ -305,6 +305,281 @@
       font-weight: 600;
     }
 
+    /* Route Map Visual Box */
+    .route-map-box {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95), rgba(8, 13, 26, 0.98));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.12);
+      overflow: hidden;
+    }
+
+    .route-map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .route-map-header h3 {
+      font-size: 1.12rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .route-legend-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .route-svg-frame {
+      width: 100%;
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 25%, rgba(30, 41, 59, 0.85) 0%, rgba(10, 15, 30, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      margin-bottom: 16px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .route-svg-frame svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .route-nodes-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .route-node-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: center;
+      font-size: 0.78rem;
+    }
+
+    .route-node-pill .node-city {
+      font-weight: 700;
+      color: #fff;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .route-node-pill .node-role {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+    }
+
+    /* Detailed Transit Leg Cards */
+    .transit-legs-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .transit-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 20px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .transit-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .transit-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .transit-leg-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .transit-leg-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--aurora-cyan);
+    }
+
+    .transit-leg-badge.ferry {
+      background: rgba(248, 113, 113, 0.15);
+      color: var(--tallinn-red);
+    }
+
+    .transit-leg-badge.train {
+      background: rgba(192, 132, 252, 0.15);
+      color: var(--aurora-purple);
+    }
+
+    .transit-leg-badge.bus {
+      background: rgba(52, 211, 153, 0.15);
+      color: var(--aurora-green);
+    }
+
+    .transit-leg-badge.flight {
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--gold);
+    }
+
+    .transit-leg-title h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .transit-metrics {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .metric-badge {
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--aurora-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .metric-badge.time {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--gold);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .metric-badge.dist {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--aurora-green);
+      border-color: rgba(52, 211, 153, 0.3);
+    }
+
+    .transit-facts-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 8px;
+      font-size: 0.83rem;
+    }
+
+    .transit-facts-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      line-height: 1.5;
+    }
+
+    .transit-facts-table td:first-child {
+      width: 125px;
+      color: var(--text-muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .transit-facts-table td:last-child {
+      color: var(--text-main);
+    }
+
+    .transit-tip-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--aurora-cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    .transit-tip-box strong {
+      color: var(--aurora-cyan);
+    }
+
+    /* Transit Summary Table */
+    .transit-summary-table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+    }
+
+    .transit-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    .transit-summary-table th {
+      background: rgba(30, 41, 59, 0.85);
+      padding: 12px 14px;
+      color: var(--aurora-cyan);
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+
+    .transit-summary-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+
+    .transit-summary-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
     /* Itinerary List */
     .itinerary-list {
       display: flex;
@@ -683,54 +958,591 @@
     <!-- 3. 교통 & 이동망 -->
     <section>
       <div class="section-header">
-        <h2 class="section-title">🚆 3. 완벽 교통 & 이동망 (장거리 운전 피로 제로)</h2>
+        <h2 class="section-title">🚆 3. 완벽 교통 & 이동망 (그림 경로도 & 구간별 팩트 가이드)</h2>
       </div>
       <p class="section-desc">
-        빙판길 렌터카 운전의 위험과 피로 없이 <strong>핀에어 직항 + 산타 야간열차 + 설원 코치버스 + 발트해 쾌속 크루즈</strong>를 유기적으로 연결한 안락한 동선입니다.
+        빙판길 렌터카 운전의 위험과 피로를 완전히 없애고, <strong>핀에어 최단 직항 + 발트해 초대형 크루즈 + VR 2층 산타 침대열차 + 라플란드 설원 고속버스 + 국내선 제트기</strong>를 하나의 유기적인 환상 루프로 연결한 안락한 동선입니다.
       </p>
-      <div class="transport-timeline">
-        <div class="transport-step">
-          <div class="step-badge">✈️</div>
-          <div class="step-content">
-            <h4>구간 1: 인천 ↔ 헬싱키 (핀에어 직항)</h4>
-            <p>1월 24일 밤 또는 1월 25일 오전 출발. 최단 북극 항로 직항편(약 12~13시간). 다구간 발권으로 라플란드 국내선까지 한 번에 연계합니다.</p>
-            <span class="step-tag">국제선 직항</span>
+
+      <!-- 🗺️ 그림으로 보는 종합 이동 경로도 (Visual SVG Route Map) -->
+      <div class="route-map-box">
+        <div class="route-map-header">
+          <h3>🗺️ 2028 북유럽 대장정 종합 이동 경로도 (Transit Route Map)</h3>
+          <div class="route-legend-bar">
+            <span class="legend-item"><span class="legend-dot" style="background:#fbbf24;"></span>대륙간 항공 (핀에어 직항)</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#f87171;"></span>발트해 쾌속 크루즈</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#c084fc;"></span>산타 야간 침대열차</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#34d399;"></span>설원 고속버스</span>
+            <span class="legend-item"><span class="legend-dot" style="background:#38bdf8;"></span>국내선 항공 / 셔틀</span>
           </div>
         </div>
 
-        <div class="transport-step" style="border-color: rgba(248, 113, 113, 0.4);">
-          <div class="step-badge ferry">🚢</div>
-          <div class="step-content">
-            <h4>구간 2: 헬싱키 ↔ 에스토니아 탈린 (발트해 쾌속 크루즈)</h4>
-            <p>헬싱키 서항에서 탈링크 실야라인(MyStar/Megastar) 초대형 쾌속 페리로 단 2시간 만에 탈린 도착. 여권 소지만으로 솅겐 구역 내 편리한 이동.</p>
-            <span class="step-tag">발트해 크루즈 편도 2시간</span>
+        <div class="route-svg-frame">
+          <svg viewBox="0 0 760 560" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Gradients & Glow Filters -->
+              <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+              <linearGradient id="auroraGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#34d399" stop-opacity="0.35"/>
+                <stop offset="50%" stop-color="#38bdf8" stop-opacity="0.45"/>
+                <stop offset="100%" stop-color="#c084fc" stop-opacity="0.35"/>
+              </linearGradient>
+              <linearGradient id="ferryLine" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f87171"/>
+                <stop offset="100%" stop-color="#fb7185"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Background Atmosphere -->
+            <rect width="760" height="560" fill="#080e1e"/>
+
+            <!-- Subtle Grid / Latitude Lines -->
+            <line x1="30" y1="95" x2="520" y2="95" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+            <text x="35" y="90" fill="#64748b" font-size="10" font-family="sans-serif">북위 68°N (라플란드 오로라 골든존)</text>
+
+            <line x1="30" y1="210" x2="520" y2="210" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+            <text x="35" y="205" fill="#64748b" font-size="10" font-family="sans-serif">북위 66.5°N (북극권 관문)</text>
+
+            <line x1="30" y1="390" x2="520" y2="390" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4,4"/>
+            <text x="35" y="385" fill="#64748b" font-size="10" font-family="sans-serif">북위 60°N (발트해 연안 수도권)</text>
+
+            <!-- Stylized Geography Silhouettes -->
+            <!-- Finland Landmass Silhouette -->
+            <path d="M 280,40 C 360,35 440,50 460,90 C 470,130 430,170 420,230 C 410,290 420,330 380,380 C 350,400 300,395 290,370 C 270,330 260,250 250,180 C 240,120 230,70 280,40 Z" fill="rgba(56, 189, 248, 0.04)" stroke="rgba(56, 189, 248, 0.15)" stroke-width="1.5"/>
+
+            <!-- Gulf of Finland Sea Area -->
+            <path d="M 240,405 C 320,400 420,405 480,420 C 470,445 400,445 280,440 Z" fill="rgba(30, 58, 138, 0.25)"/>
+            <text x="390" y="425" fill="#3b82f6" font-size="10" font-weight="600" opacity="0.6" letter-spacing="1">GULF OF FINLAND (핀란드만)</text>
+
+            <!-- Estonia Landmass Silhouette -->
+            <path d="M 270,445 C 350,440 430,445 450,470 C 460,510 400,530 340,525 C 280,520 260,480 270,445 Z" fill="rgba(248, 113, 113, 0.05)" stroke="rgba(248, 113, 113, 0.2)" stroke-width="1.5"/>
+
+            <!-- Arctic Circle Glowing Line -->
+            <line x1="40" y1="150" x2="520" y2="150" stroke="url(#auroraGrad)" stroke-width="2.5" stroke-dasharray="8,6" filter="url(#glow)"/>
+            <rect x="150" y="138" width="260" height="24" rx="12" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(52, 211, 153, 0.4)"/>
+            <text x="280" y="154" fill="#34d399" font-size="11" font-weight="700" text-anchor="middle">🌌 북극권 한계선 (Arctic Circle · 66°33'N)</text>
+
+            <!-- Incheon Hub Inset Card (Right side) -->
+            <g transform="translate(555, 255)">
+              <rect width="185" height="155" rx="16" fill="rgba(22, 32, 54, 0.9)" stroke="rgba(251, 191, 36, 0.45)" stroke-width="1.5" filter="url(#glow)"/>
+              <rect x="12" y="12" width="28" height="20" rx="4" fill="rgba(255,255,255,0.1)"/>
+              <text x="26" y="27" font-size="13" text-anchor="middle">🇰🇷</text>
+              <text x="48" y="27" fill="#fbbf24" font-size="12" font-weight="800">대한민국 인천</text>
+              <text x="14" y="52" fill="#fff" font-size="13" font-weight="700">인천국제공항 (ICN)</text>
+              <text x="14" y="72" fill="#94a3b8" font-size="10.5">· 1.25 출국 ➔ 헬싱키</text>
+              <text x="14" y="90" fill="#94a3b8" font-size="10.5">· 2.13 귀국 도착 ➔ 귀가 휴식</text>
+              <rect x="14" y="106" width="156" height="32" rx="8" fill="rgba(251, 191, 36, 0.12)" stroke="rgba(251, 191, 36, 0.3)"/>
+              <text x="92" y="126" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle">✈️ 핀에어 A350 직항 연계</text>
+            </g>
+
+            <!-- ROUTE PATHS -->
+            <!-- 1. Flight Route: Incheon ➔ Helsinki (Outbound Arc) -->
+            <path d="M 555,305 C 470,215 395,280 330,390" fill="none" stroke="#fbbf24" stroke-width="3" stroke-dasharray="8,5" filter="url(#glow)"/>
+            <!-- Flight Badge: Incheon -> Helsinki -->
+            <g transform="translate(425, 285)">
+              <rect x="-65" y="-12" width="130" height="24" rx="12" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
+              <text x="0" y="4" fill="#fbbf24" font-size="10.5" font-weight="700" text-anchor="middle">✈️ 직항 13h 30m (7,050km)</text>
+            </g>
+
+            <!-- 2. Ferry Route: Helsinki ↔ Tallinn (Sea line) -->
+            <path d="M 330,400 L 330,475" fill="none" stroke="url(#ferryLine)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+            <!-- Ferry Badge -->
+            <g transform="translate(330, 438)">
+              <rect x="-68" y="-12" width="136" height="24" rx="12" fill="#0f172a" stroke="#f87171" stroke-width="1.2"/>
+              <text x="0" y="4" fill="#f87171" font-size="10.5" font-weight="700" text-anchor="middle">🚢 쾌속 크루즈 2h (80km)</text>
+            </g>
+
+            <!-- 3. Night Train Route: Helsinki ➔ Rovaniemi (VR Santa Express) -->
+            <path d="M 320,385 C 240,310 250,250 320,215" fill="none" stroke="#c084fc" stroke-width="3.5" stroke-dasharray="10,4" filter="url(#glow)"/>
+            <!-- Train Badge -->
+            <g transform="translate(245, 295)">
+              <rect x="-68" y="-12" width="136" height="24" rx="12" fill="#0f172a" stroke="#c084fc" stroke-width="1.2"/>
+              <text x="0" y="4" fill="#c084fc" font-size="10.5" font-weight="700" text-anchor="middle">🚂 산타 침대열차 11.5h (830km)</text>
+            </g>
+
+            <!-- 4. Snow Bus Route: Rovaniemi ➔ Saariselkä (E75 Lapland Highway) -->
+            <path d="M 330,205 L 330,105" fill="none" stroke="#34d399" stroke-width="4.5" stroke-linecap="round" filter="url(#glow)"/>
+            <!-- Bus Badge -->
+            <g transform="translate(330, 155)">
+              <rect x="-68" y="-12" width="136" height="24" rx="12" fill="#0f172a" stroke="#34d399" stroke-width="1.2"/>
+              <text x="0" y="4" fill="#34d399" font-size="10.5" font-weight="700" text-anchor="middle">🚐 설원 고속버스 3.5h (250km)</text>
+            </g>
+
+            <!-- 5. Shuttle Route: Saariselkä ➔ Ivalo Airport -->
+            <path d="M 345,95 L 420,85" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/>
+            <g transform="translate(382, 75)">
+              <rect x="-42" y="-10" width="84" height="20" rx="10" fill="#0f172a" stroke="#38bdf8" stroke-width="1"/>
+              <text x="0" y="4" fill="#38bdf8" font-size="9.5" font-weight="700" text-anchor="middle">🚌 셔틀 25m</text>
+            </g>
+
+            <!-- 6. Domestic Flight Route: Ivalo Airport ➔ Helsinki (Flight Arc) -->
+            <path d="M 430,95 C 475,200 440,300 345,385" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" filter="url(#glow)"/>
+            <!-- Domestic Flight Badge -->
+            <g transform="translate(440, 220)">
+              <rect x="-62" y="-12" width="124" height="24" rx="12" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+              <text x="0" y="4" fill="#38bdf8" font-size="10.5" font-weight="700" text-anchor="middle">🛫 핀에어 국내선 1.5h (930km)</text>
+            </g>
+
+            <!-- 7. Return Flight: Helsinki ➔ Incheon (Lower Return Arc) -->
+            <path d="M 340,395 C 430,450 510,430 555,345" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="8,5" opacity="0.8"/>
+            <g transform="translate(460, 415)">
+              <rect x="-62" y="-11" width="124" height="22" rx="11" fill="#0f172a" stroke="#fbbf24" stroke-width="1"/>
+              <text x="0" y="4" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">✈️ 귀국 11h 45m (편서풍 단축)</text>
+            </g>
+
+            <!-- CITY NODES (Icons & Labels) -->
+            <!-- Node: Saariselkä -->
+            <g transform="translate(330, 95)">
+              <circle r="18" fill="#0f172a" stroke="#34d399" stroke-width="2.5" filter="url(#glow)"/>
+              <circle r="6" fill="#34d399"/>
+              <text x="0" y="4" font-size="12" text-anchor="middle">🌌</text>
+              <rect x="-110" y="-48" width="220" height="38" rx="10" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(52, 211, 153, 0.5)"/>
+              <text x="0" y="-31" fill="#34d399" font-size="12" font-weight="800" text-anchor="middle">사리셀카 (Saariselkä)</text>
+              <text x="0" y="-16" fill="#cbd5e1" font-size="10.5" text-anchor="middle">글래스 이글루 & 샬레 [오로라 5박]</text>
+            </g>
+
+            <!-- Node: Ivalo Airport -->
+            <g transform="translate(435, 80)">
+              <circle r="15" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+              <text x="0" y="4" font-size="10" text-anchor="middle">✈️</text>
+              <rect x="20" y="-14" width="105" height="28" rx="8" fill="rgba(15, 23, 42, 0.9)" stroke="rgba(56, 189, 248, 0.4)"/>
+              <text x="72" y="-1" fill="#38bdf8" font-size="10.5" font-weight="700" text-anchor="middle">이발로 공항 (IVL)</text>
+              <text x="72" y="11" fill="#94a3b8" font-size="9" text-anchor="middle">최북단 국내선 공항</text>
+            </g>
+
+            <!-- Node: Rovaniemi -->
+            <g transform="translate(330, 210)">
+              <circle r="18" fill="#0f172a" stroke="#c084fc" stroke-width="2.5" filter="url(#glow)"/>
+              <circle r="6" fill="#c084fc"/>
+              <text x="0" y="4" font-size="12" text-anchor="middle">🎅</text>
+              <rect x="-110" y="24" width="220" height="38" rx="10" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(192, 132, 252, 0.5)"/>
+              <text x="0" y="41" fill="#c084fc" font-size="12" font-weight="800" text-anchor="middle">로바니에미 (Rovaniemi)</text>
+              <text x="0" y="56" fill="#cbd5e1" font-size="10.5" text-anchor="middle">산타마을 & 북극권 관문 [3박]</text>
+            </g>
+
+            <!-- Node: Helsinki -->
+            <g transform="translate(330, 390)">
+              <circle r="20" fill="#0f172a" stroke="#38bdf8" stroke-width="3" filter="url(#glow)"/>
+              <circle r="7" fill="#38bdf8"/>
+              <text x="0" y="5" font-size="13" text-anchor="middle">🏛️</text>
+              <rect x="-120" y="-50" width="110" height="42" rx="10" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(56, 189, 248, 0.5)"/>
+              <text x="-65" y="-32" fill="#38bdf8" font-size="12" font-weight="800" text-anchor="middle">헬싱키 (Helsinki)</text>
+              <text x="-65" y="-17" fill="#cbd5e1" font-size="10" text-anchor="middle">수도 허브 [시티 5박]</text>
+            </g>
+
+            <!-- Node: Tallinn -->
+            <g transform="translate(330, 480)">
+              <circle r="18" fill="#0f172a" stroke="#f87171" stroke-width="2.5" filter="url(#glow)"/>
+              <circle r="6" fill="#f87171"/>
+              <text x="0" y="4" font-size="12" text-anchor="middle">🏰</text>
+              <rect x="-115" y="24" width="230" height="38" rx="10" fill="rgba(15, 23, 42, 0.92)" stroke="rgba(248, 113, 113, 0.5)"/>
+              <text x="0" y="41" fill="#f87171" font-size="12" font-weight="800" text-anchor="middle">탈린 (Tallinn · 에스토니아)</text>
+              <text x="0" y="56" fill="#cbd5e1" font-size="10.5" text-anchor="middle">유네스코 세계유산 중세마을 [3박]</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="route-nodes-summary">
+          <div class="route-node-pill">
+            <span class="node-city">1. 인천 ICN 🇰🇷</span>
+            <span class="node-role">대륙간 직항 출발/도착</span>
+          </div>
+          <div class="route-node-pill">
+            <span class="node-city">2. 탈린 🇪🇪</span>
+            <span class="node-role">발트해 크루즈 2h (3박)</span>
+          </div>
+          <div class="route-node-pill">
+            <span class="node-city">3. 로바니에미 🎅</span>
+            <span class="node-role">야간열차 침대칸 (3박)</span>
+          </div>
+          <div class="route-node-pill">
+            <span class="node-city">4. 사리셀카 🌌</span>
+            <span class="node-role">설원버스 3.5h (5박)</span>
+          </div>
+          <div class="route-node-pill">
+            <span class="node-city">5. 헬싱키 🏛️</span>
+            <span class="node-role">국내선 제트기 복귀 (5박)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 📊 종합 이동 정보 한눈에 보기 표 -->
+      <div class="transit-summary-table-wrap">
+        <table class="transit-summary-table">
+          <thead>
+            <tr>
+              <th>구간</th>
+              <th>이동 수단 & 편명</th>
+              <th>소요 시간</th>
+              <th>이동 거리</th>
+              <th>운항/운행 빈도</th>
+              <th>좌석 및 객실 특징</th>
+              <th>핵심 실전 팁</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>인천 ➔ 헬싱키</strong></td>
+              <td>핀에어 A350-900 (AY042)</td>
+              <td><span style="color:var(--gold); font-weight:700;">약 13시간 30분</span></td>
+              <td>약 7,050 km</td>
+              <td>매일 주 7회 직항</td>
+              <td>최신 광동체, Wi-Fi, 무료 기내식 2회</td>
+              <td>다구간 발권 시 국내선 수하물 무료 연결</td>
+            </tr>
+            <tr>
+              <td><strong>헬싱키 ↔ 탈린</strong></td>
+              <td>탈링크 실야라인 (MyStar/Megastar)</td>
+              <td><span style="color:var(--tallinn-red); font-weight:700;">편도 2시간</span></td>
+              <td>약 80 km</td>
+              <td>매일 6~8회 왕복</td>
+              <td>5만 톤급 대형 크루즈, 면세점, 파노라마 라운지</td>
+              <td>솅겐 무비자 간편 입국, 파도 흔들림·멀미 0%</td>
+            </tr>
+            <tr>
+              <td><strong>헬싱키 ➔ 로바니에미</strong></td>
+              <td>VR 핀란드 국철 산타 침대열차</td>
+              <td><span style="color:var(--aurora-purple); font-weight:700;">약 11시간 30분</span></td>
+              <td>약 830 km</td>
+              <td>매일 야간 2~3편</td>
+              <td>2층 디럭스: 프라이빗 전용 샤워실·화장실</td>
+              <td>탑승 60~90일 전 오픈 당일 디럭스룸 선점 필수</td>
+            </tr>
+            <tr>
+              <td><strong>로바니에미 ➔ 사리셀카</strong></td>
+              <td>마트카후올토 (Eskelisen 고속버스)</td>
+              <td><span style="color:var(--aurora-green); font-weight:700;">약 3시간 30분</span></td>
+              <td>약 250 km</td>
+              <td>매일 3~4회 운행</td>
+              <td>대형 설원 리무진, 바닥 온풍, 차내 화장실·Wi-Fi</td>
+              <td>빙판길 자가운전 위험 제로, 리조트 정문 앞 직행</td>
+            </tr>
+            <tr>
+              <td><strong>사리셀카 ➔ 이발로공항</strong></td>
+              <td>이발로 공항 셔틀 리무진</td>
+              <td><span style="color:var(--aurora-cyan); font-weight:700;">약 25~30분</span></td>
+              <td>약 28 km</td>
+              <td>항공편 출발 100% 맞춤</td>
+              <td>리조트 로비 앞 순회 픽업 전용 버스</td>
+              <td>핀에어 출발 2시간 전 로비 탑승 (기사 현장 카드결제)</td>
+            </tr>
+            <tr>
+              <td><strong>이발로 ➔ 헬싱키</strong></td>
+              <td>핀에어 국내선 (A320/A321)</td>
+              <td><span style="color:var(--aurora-cyan); font-weight:700;">1시간 35분</span></td>
+              <td>약 930 km</td>
+              <td>매일 2~4편 직항</td>
+              <td>정규 제트 여객기, 음료 서비스</td>
+              <td>북극권 횡단 1.5시간 주파로 귀국길 피로 원천 차단</td>
+            </tr>
+            <tr>
+              <td><strong>헬싱키 ➔ 인천</strong></td>
+              <td>핀에어 A350-900 (AY041)</td>
+              <td><span style="color:var(--gold); font-weight:700;">약 11시간 45분</span></td>
+              <td>약 7,050 km</td>
+              <td>매일 주 7회 직항</td>
+              <td>편서풍 제트기류 영향으로 1.5시간 단축</td>
+              <td>귀국 후 2일간 온전한 휴식 확보</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 🚍 사실 기반 구간별 상세 안내 카드 (Fact-based Transit Legs) -->
+      <div class="transit-legs-grid">
+
+        <!-- Leg 1 -->
+        <div class="transit-card">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge flight">✈️</div>
+              <div>
+                <h3>구간 1: 인천(ICN) ➔ 헬싱키(HEL) [대륙간 북극 직항]</h3>
+                <span class="step-tag" style="background:rgba(251,191,36,0.15); color:var(--gold);">핀에어(Finnair) 정기 직항편</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time">⏱️ 약 13시간 30분</span>
+              <span class="metric-badge dist">📏 7,050 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운항 항공사</td>
+              <td><strong>핀에어 (Finnair)</strong> · 최신형 Airbus A350-900 광동체 여객기 운항</td>
+            </tr>
+            <tr>
+              <td>운항 스케줄</td>
+              <td>매일 1회 정기 운항 (인천 T1 출발 ➔ 헬싱키 반타공항 도착)</td>
+            </tr>
+            <tr>
+              <td>기내 편의시설</td>
+              <td>전 좌석 개별 AVOD 스크린 모니터, USB 충전 포트, 기내 고속 Wi-Fi, 정규 기내식 2회 및 무제한 블루베리 주스/음료 제공</td>
+            </tr>
+            <tr>
+              <td>수하물 규정</td>
+              <td>위탁 수하물 23kg 1개 + 기내 수하물 8kg 기본 포함 (Classic 운임 기준)</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box">
+            <strong>💡 실전 발권 꿀팁:</strong> '인천➔헬싱키 + 이발로➔헬싱키 + 헬싱키➔인천'을 핀에어 공식 홈페이지에서 <strong>다구간(Multi-city)</strong>으로 한 번에 발권하면, 라플란드 국내선 수하물 23kg가 전 구간 자동 연결되며 개별 발권 대비 약 20~30% 비용이 절감됩니다.
           </div>
         </div>
 
-        <div class="transport-step">
-          <div class="step-badge">🚂</div>
-          <div class="step-content">
-            <h4>구간 3: 헬싱키 ➔ 로바니에미 (산타클로스 익스프레스)</h4>
-            <p>밤 21시 헬싱키 중앙역 출발, 다음 날 아침 8시 로바니에미 도착. 2층 전용 디럭스 침대칸(화장실·샤워실 완비)에서 숙박과 낭만을 동시에 누립니다.</p>
-            <span class="step-tag">VR 2층 야간 침대열차</span>
+        <!-- Leg 2 -->
+        <div class="transit-card" style="border-color: rgba(248, 113, 113, 0.35);">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge ferry">🚢</div>
+              <div>
+                <h3>구간 2: 헬싱키(HEL) ↔ 에스토니아 탈린(TLL) [발트해 쾌속 크루즈]</h3>
+                <span class="step-tag" style="background:rgba(248,113,113,0.15); color:var(--tallinn-red);">탈링크 실야라인 (Tallink Silja MyStar / Megastar)</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time" style="background:rgba(248,113,113,0.15); color:var(--tallinn-red); border-color:rgba(248,113,113,0.3);">⏱️ 편도 2시간 정시 운항</span>
+              <span class="metric-badge dist">📏 80 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운항 선사/선박</td>
+              <td><strong>탈링크 실야라인 (Tallink Silja Line)</strong>의 친환경 LNG 5만 톤급 대형 여객선 'MyStar' 및 'Megastar'</td>
+            </tr>
+            <tr>
+              <td>운항 빈도</td>
+              <td>매일 오전 07:30부터 밤 22:30까지 하루 6~8편 상시 왕복 운항 (겨울철 쇄빙 1A Super 등급 선박으로 결항 위험 제로)</td>
+            </tr>
+            <tr>
+              <td>승하선 터미널</td>
+              <td>
+                · 헬싱키: 서항 터미널 2 (West Harbour T2 / Länsisatama) — 헬싱키 중앙역에서 7번·9번 트램으로 10분 직결<br>
+                · 탈린: 올드 시티 하버 (Vanasadam D-터미널) — 유네스코 올드타운 비루문까지 도보 15분 또는 택시/Bolt 5분
+              </td>
+            </tr>
+            <tr>
+              <td>선내 부대시설</td>
+              <td>2층 규모 초대형 면세점(Traveller Superstore), 발트해 오션뷰 라운지, 카페, 버거킹, 식당가, 무료 대형 캐리어 보관 구역 완비</td>
+            </tr>
+            <tr>
+              <td>출입국 절차</td>
+              <td>핀란드와 에스토니아 모두 솅겐 조약 가입국으로, 별도의 출입국 심사 도장 없이 여권 신분 확인만으로 쾌속 승하선</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box" style="border-left-color: var(--tallinn-red); background: rgba(248,113,113,0.08);">
+            <strong>💡 실전 이용 팁:</strong> 5만 톤급 초대형 크루즈라 한겨울 얼음 바다 위를 가르며 달려도 흔들림이나 뱃멀미가 전혀 없습니다. 출발 40분 전 터미널에 도착해 모바일 QR코드로 무인 발권기에서 10초 만에 탑승권을 출력할 수 있습니다.
           </div>
         </div>
 
-        <div class="transport-step">
-          <div class="step-badge">🚐</div>
-          <div class="step-content">
-            <h4>구간 4: 로바니에미 ➔ 사리셀카 칵슬라우타넨 (설원 고속버스)</h4>
-            <p>산타마을/역에서 마트카후올토(Matkahuolto) 장거리 코치버스로 3시간 만에 설원을 가로질러 글래스 이글루 리조트 정문 앞 직행 하차.</p>
-            <span class="step-tag">라플란드 설원 버스</span>
+        <!-- Leg 3 -->
+        <div class="transit-card" style="border-color: rgba(192, 132, 252, 0.35);">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge train">🚂</div>
+              <div>
+                <h3>구간 3: 헬싱키 중앙역 ➔ 로바니에미 [VR 2층 산타 침대열차]</h3>
+                <span class="step-tag" style="background:rgba(192,132,252,0.15); color:var(--aurora-purple);">산타클로스 익스프레스 (Santa Claus Express)</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time" style="background:rgba(192,132,252,0.15); color:var(--aurora-purple); border-color:rgba(192,132,252,0.3);">⏱️ 약 11시간 30분 ~ 12시간</span>
+              <span class="metric-badge dist">📏 830 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운영 철도청</td>
+              <td><strong>VR 핀란드 국유철도 (VR Group)</strong> 정규 인터시티(IC) 2층 더블데커 야간 침대열차</td>
+            </tr>
+            <tr>
+              <td>추천 운행 스케줄</td>
+              <td>헬싱키 중앙역 저녁 23:13 출발 ➔ 로바니에미역 다음 날 아침 10:50 도착 (또는 19:29 출발 ➔ 07:28 도착)</td>
+            </tr>
+            <tr>
+              <td>추천 객실 등급</td>
+              <td><strong>2층 상단 전용 디럭스 2인 침대칸 (Upper Deck Compartment with ensuite Shower/WC)</strong></td>
+            </tr>
+            <tr>
+              <td>객실 내 시설</td>
+              <td><strong>객실 내 프라이빗 전용 샤워부스 & 수세식 화장실 완비</strong>, 호텔식 고급 린넨 침구, 수건 2장, 220V 콘센트, 개별 온도 조절기, 무료 생수, Wi-Fi 제공</td>
+            </tr>
+            <tr>
+              <td>열차 내 편의시설</td>
+              <td>1층에 24시간 식당칸(Ravintolavaunu) 운영 — 미트볼, 연어 크림 수프, 시나몬 롤, 핀란드 생맥주 및 따뜻한 커피 판매</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box" style="border-left-color: var(--aurora-purple); background: rgba(192,132,252,0.08);">
+            <strong>💡 예약 필수 전략:</strong> 프라이빗 샤워실이 딸린 2층 디럭스 룸은 열차 1편당 수량이 매우 적어 탑승 60~90일 전 VR 공식 사이트(vr.fi) 및 앱 예매 오픈 당일 매진됩니다. 오픈 일정을 달력에 메모해 두고 즉시 예약하는 것이 핵심입니다.
           </div>
         </div>
 
-        <div class="transport-step">
-          <div class="step-badge">🛫</div>
-          <div class="step-content">
-            <h4>구간 5: 사리셀카 ➔ 이발로 공항 ➔ 헬싱키 (국내선 복귀)</h4>
-            <p>리조트 30분 거리 이발로 공항에서 핀에어 국내선 탑승(1시간 35분), 헬싱키로 쾌속 복귀하여 귀국길 체력을 완벽히 보존합니다.</p>
-            <span class="step-tag">핀에어 국내선 1.5시간</span>
+        <!-- Leg 4 -->
+        <div class="transit-card" style="border-color: rgba(52, 211, 153, 0.35);">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge bus">🚐</div>
+              <div>
+                <h3>구간 4: 로바니에미 ➔ 사리셀카 칵슬라우타넨 [라플란드 설원 고속버스]</h3>
+                <span class="step-tag" style="background:rgba(52,211,153,0.15); color:var(--aurora-green);">마트카후올토 (Matkahuolto · Eskelisen Lapinlinjat)</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time" style="background:rgba(52,211,153,0.15); color:var(--aurora-green); border-color:rgba(52,211,153,0.3);">⏱️ 약 3시간 15분 ~ 3시간 30분</span>
+              <span class="metric-badge dist">📏 250 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운송 운영사</td>
+              <td><strong>마트카후올토 (Matkahuolto)</strong> 네트워크 정규 장거리 코치버스 (Eskelisen Lapinlinjat 전용 리무진)</td>
+            </tr>
+            <tr>
+              <td>운행 경로</td>
+              <td>로바니에미 기차역 앞 / 산타마을 정류장 ➔ E75 북극 고속도로 ➔ 칵슬라우타넨 리조트 정문 ➔ 사리셀카 마을 중심</td>
+            </tr>
+            <tr>
+              <td>운행 빈도</td>
+              <td>매일 오전·오후 3~4회 정기 운행 (산타마을 관광 후 바로 환승 탑승 가능)</td>
+            </tr>
+            <tr>
+              <td>차량 제원 & 편의</td>
+              <td>북유럽 혹한기 전용 대형 리무진 코치, 강력한 바닥 온풍 히터, 차내 수세식 화장실, 무료 고속 Wi-Fi, 좌석별 USB 충전구, 대형 캐리어 하부 전용 적재함</td>
+            </tr>
+            <tr>
+              <td>하차 편의성</td>
+              <td>칵슬라우타넨 이글루 리조트 정문(East/West Village) 및 사리셀카 주요 호텔 바로 앞 정류장 정차</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box" style="border-left-color: var(--aurora-green); background: rgba(52,211,153,0.08);">
+            <strong>💡 왜 렌터카 대신 설원 버스인가?:</strong> 한겨울 라플란드는 영하 20~30도 극저온, 하루 4시간의 짧은 일조량(어둠), 두꺼운 빙판길(블랙아이스), 그리고 갑자기 도로로 뛰어드는 야생 순록 무리로 인해 렌터카 운전이 극도로 위험합니다. 숙련된 현지 전문 기사가 운전하는 따뜻한 버스로 설경을 감상하며 이동하는 것이 가장 안전하고 편안합니다.
+          </div>
+        </div>
+
+        <!-- Leg 5 -->
+        <div class="transit-card">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge">🚌</div>
+              <div>
+                <h3>구간 5: 사리셀카 ➔ 이발로 공항(IVL) [공항 셔틀 리무진]</h3>
+                <span class="step-tag">이발로 공항 셔틀 (Airport Bus Express)</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time">⏱️ 약 25~30분</span>
+              <span class="metric-badge dist">📏 28 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운행 방식</td>
+              <td><strong>핀에어(Finnair) 이발로 출발 항공편 시간에 100% 연동</strong>하여 매 항공편 출발 약 2시간~2시간 15분 전 사리셀카 리조트 로비 순회 픽업</td>
+            </tr>
+            <tr>
+              <td>탑승 장소</td>
+              <td>사리셀카 산타스 호텔, 리에콘린나, 칵슬라우타넨 리조트 안내 데스크 앞</td>
+            </tr>
+            <tr>
+              <td>이용 요금</td>
+              <td>1인 편도 약 €10~15 내외 (기사님께 탑승 시 신용카드 직접 결제 또는 Matkahuolto 사전 예매)</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box">
+            <strong>💡 셔틀 이용 팁:</strong> 별도의 개인 택시(약 €80~100)를 부를 필요 없이 리조트 리셉션에 공항 셔틀 시간을 전날 확인해 두면 로비 정문에서 바로 탑승할 수 있습니다.
+          </div>
+        </div>
+
+        <!-- Leg 6 -->
+        <div class="transit-card">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge">🛫</div>
+              <div>
+                <h3>구간 6: 이발로 공항(IVL) ➔ 헬싱키 공항(HEL) [북극권 초고속 복귀]</h3>
+                <span class="step-tag">핀에어(Finnair) 국내선 직항 제트기</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time">⏱️ 단 1시간 35분</span>
+              <span class="metric-badge dist">📏 930 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운항 항공사/기종</td>
+              <td><strong>핀에어 (Finnair)</strong> 정규 직항편 (Airbus A320 / A321 또는 Embraer 190)</td>
+            </tr>
+            <tr>
+              <td>운항 빈도</td>
+              <td>겨울 오로라 성수기 매일 2~4회 직항 운항 (오전, 낮, 저녁 스케줄)</td>
+            </tr>
+            <tr>
+              <td>탑승/도착 공항</td>
+              <td>핀란드 최북단 이발로 공항(IVL) ➔ 헬싱키 반타 국제공항(HEL)</td>
+            </tr>
+            <tr>
+              <td>시내 연결</td>
+              <td>헬싱키 반타공항 도착 후 공항철도(I/P 열차) 탑승 시 28분 만에 헬싱키 중앙역 시내 중심부 도착</td>
+            </tr>
+          </table>
+          <div class="transit-tip-box">
+            <strong>💡 일정 설계의 묘미:</strong> 800km가 넘는 광활한 설원 종단을 단 1시간 35분 만에 비행기로 주파하여 이동 피로를 제로로 만듭니다. 낮 12시 비행기를 타면 오후 2시에 헬싱키 시내 호텔에 짐을 풀고 바로 감성 카페와 쇼핑, 사우나를 즐길 수 있습니다.
+          </div>
+        </div>
+
+        <!-- Leg 7 -->
+        <div class="transit-card">
+          <div class="transit-card-top">
+            <div class="transit-leg-title">
+              <div class="transit-leg-badge flight">✈️</div>
+              <div>
+                <h3>구간 7: 헬싱키(HEL) ➔ 인천(ICN) [최종 귀국 직항]</h3>
+                <span class="step-tag" style="background:rgba(251,191,36,0.15); color:var(--gold);">핀에어 A350-900 (AY041)</span>
+              </div>
+            </div>
+            <div class="transit-metrics">
+              <span class="metric-badge time">⏱️ 약 11시간 45분 (단축)</span>
+              <span class="metric-badge dist">📏 7,050 km</span>
+            </div>
+          </div>
+          <table class="transit-facts-table">
+            <tr>
+              <td>운항 스케줄</td>
+              <td>2월 12일(토) 저녁 17:30 헬싱키 반타공항 출발 ➔ 2월 13일(일) 오전 11:15 인천국제공항 T1 도착</td>
+            </tr>
+            <tr>
+              <td>비행 시간 단축 이유</td>
+              <td>귀국편은 편서풍(제트기류)의 영향으로 출국편(13.5시간)보다 약 1시간 45분 단축되어 약 11시간 45분 만에 쾌속 도착</td>
+            </tr>
+            <tr>
+              <td>귀국 후 연계</td>
+              <td>2월 13일 일요일 오전 인천 도착 후 집으로 귀가 ➔ 2월 13~14일 이틀간 푹 쉬며 완벽한 시차 적응 후 2월 15일 화요일 출근!</td>
+            </tr>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- 💡 무피로 안전 이동 3대 핵심 원칙 -->
+      <div style="margin-top: 24px; background: rgba(56, 189, 248, 0.06); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 16px; padding: 20px;">
+        <h4 style="color: #fff; font-size: 1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span>🛡️</span> 장거리 운전 없는 '무피로 힐링 이동' 3대 핵심 원칙
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; font-size: 0.84rem; color: #cbd5e1;">
+          <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: var(--aurora-cyan); display: block; margin-bottom: 4px;">1. 빙판길 운전 피로 제로</strong>
+            영하 20도의 혹한, 블랙아이스, 야생 순록 충돌 위험이 큰 겨울 북극권 렌터카를 배제하고 전 구간 베테랑 현지 대중교통망을 활용해 안전을 100% 담보합니다.
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: var(--aurora-purple); display: block; margin-bottom: 4px;">2. 이동 시간의 낭만과 관광화</strong>
+            야간열차는 샤워 후 침대에서 자는 호텔 역할을 하고, 대형 페리는 면세 쇼핑과 발트해 뷰 라운지가 되며, 설원 버스는 통유리 파노라마 관광이 됩니다.
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: var(--aurora-green); display: block; margin-bottom: 4px;">3. 다구간 발권 수하물 자동 연계</strong>
+            핀에어 다구간(Multi-city)으로 국제선과 국내선을 묶어 발권하면 라플란드 국내선 추가 수하물 요금 없이 23kg 수하물이 자동 연결되어 편리합니다.
           </div>
         </div>
       </div>
