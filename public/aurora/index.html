@@ -149,6 +149,161 @@
       .day .c { grid-column: 1 / -1; }
       summary .meta { display: none; }
     }
+  
+    /* Gantt Timeline */
+    .gantt-container {
+      margin-top: 18px;
+    }
+    .gantt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 8px;
+    }
+    .gantt-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .gantt-hint {
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+    .gantt-bar-wrap {
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gantt-bar {
+      display: flex;
+      min-width: 680px;
+      height: 52px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    }
+    .gantt-segment {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 1.25;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      transition: filter 0.2s;
+    }
+    .gantt-segment:last-child {
+      border-right: none;
+    }
+    .gantt-segment:hover {
+      filter: brightness(1.2);
+    }
+    .gantt-segment .seg-nights {
+      font-size: 0.68rem;
+      opacity: 0.9;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .seg-helsinki-1 { width: 5%; background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .seg-train      { width: 5%; background: linear-gradient(135deg, #a855f7, #7e22ce); }
+    .seg-rovaniemi  { width: 15%; background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .seg-saariselka { width: 25%; background: linear-gradient(135deg, #10b981, #047857); }
+    .seg-inari      { width: 10%; background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .seg-tallinn    { width: 20%; background: linear-gradient(135deg, #ef4444, #b91c1c); }
+    .seg-helsinki-2 { width: 10%; background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .seg-home       { width: 10%; background: linear-gradient(135deg, #64748b, #475569); }
+
+    .gantt-moves {
+      display: flex;
+      min-width: 680px;
+      justify-content: space-between;
+      margin-top: 6px;
+      padding: 0 4px;
+      gap: 6px;
+    }
+    .gantt-move-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--cyan);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .region-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .region-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+    .region-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .region-name {
+      font-weight: 700;
+      color: var(--text);
+    }
+    .stay-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .stay-pill.p-gold { background: rgba(251, 191, 36, 0.18); color: var(--gold); border-color: rgba(251, 191, 36, 0.3); }
+    .stay-pill.p-green { background: rgba(52, 211, 153, 0.18); color: var(--green); border-color: rgba(52, 211, 153, 0.3); }
+    .stay-pill.p-red { background: rgba(248, 113, 113, 0.18); color: var(--red); border-color: rgba(248, 113, 113, 0.3); }
+    .stay-pill.p-purple { background: rgba(192, 132, 252, 0.18); color: var(--purple); border-color: rgba(192, 132, 252, 0.3); }
+    .region-date {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .region-hotel {
+      color: #cbd5e1;
+      font-size: 0.8rem;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .region-move {
+      font-size: 0.75rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 3px solid var(--cyan);
+      color: #cbd5e1;
+    }
+
   </style>
 </head>
 <body>
@@ -198,6 +353,200 @@
         </table>
       </div>
     </details>
+  
+    <!-- Gantt Bar & Region Timeline -->
+    <div class="gantt-container">
+      <div class="gantt-header">
+        <span class="gantt-title">📊 20일 지역별 체류 기간 & 이동 타임라인</span>
+        <span class="gantt-hint">가로로 밀어서 전체 조망 ➔</span>
+      </div>
+
+      <div class="gantt-bar-wrap">
+        <div class="gantt-bar">
+          <div class="gantt-segment seg-helsinki-1" title="헬싱키 1박 (1.25~1.26)">
+            <span>헬싱키</span>
+            <span class="seg-nights">1박</span>
+          </div>
+          <div class="gantt-segment seg-train" title="VR 산타 침대열차 1박 (1.26~1.27)">
+            <span>침대열차</span>
+            <span class="seg-nights">1박</span>
+          </div>
+          <div class="gantt-segment seg-rovaniemi" title="로바니에미 3박 (1.27~1.30)">
+            <span>로바니에미</span>
+            <span class="seg-nights">3박 (설날 이글루 1박)</span>
+          </div>
+          <div class="gantt-segment seg-saariselka" title="사리셀카 5박 연박 (1.30~2.4)">
+            <span>사리셀카</span>
+            <span class="seg-nights">★ 5연박 (통나무 샬레)</span>
+          </div>
+          <div class="gantt-segment seg-inari" title="이나리 호수 2박 (2.4~2.6)">
+            <span>이나리 (NEW)</span>
+            <span class="seg-nights">2박 (오로라 캐빈)</span>
+          </div>
+          <div class="gantt-segment seg-tallinn" title="에스토니아 탈린 4박 (2.6~2.10)">
+            <span>탈린 (에스토니아)</span>
+            <span class="seg-nights">★ 4박 (중세 구시가지)</span>
+          </div>
+          <div class="gantt-segment seg-helsinki-2" title="헬싱키 도심 2박 (2.10~2.12)">
+            <span>헬싱키</span>
+            <span class="seg-nights">2박 (5성 부티크)</span>
+          </div>
+          <div class="gantt-segment seg-home" title="귀국 & 집 휴식 (2.12~2.14)">
+            <span>귀국·휴식</span>
+            <span class="seg-nights">기내1박+집2일</span>
+          </div>
+        </div>
+
+        <div class="gantt-moves">
+          <span class="gantt-move-pill">1.26 🚂 야간열차 12h</span>
+          <span class="gantt-move-pill">1.30 🚐 설원버스 3.5h</span>
+          <span class="gantt-move-pill">2.4 🚌 설원버스 40m</span>
+          <span class="gantt-move-pill">2.6 ✈️ 국내선 + 🚢 페리</span>
+          <span class="gantt-move-pill">2.10 🚢 페리 2h</span>
+          <span class="gantt-move-pill">2.12 ✈️ 핀에어 귀국</span>
+        </div>
+      </div>
+
+      <!-- 8대 거점 요약 카드 그리드 -->
+      <div class="region-cards-grid">
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🇫🇮 헬싱키 (입국)</span>
+              <span class="stay-pill">1박 2일</span>
+            </div>
+            <div class="region-date">📅 1.25 (화) ~ 1.26 (수)</div>
+            <div class="region-hotel">
+              <strong>🏨 중앙역 인근 호텔</strong><br>
+              인천 직항 도착 후 시차 적응 및 에스플라나디 산책
+            </div>
+          </div>
+          <div class="region-move">
+            🚂 1.26 19:29 산타 침대열차로 로바니에미 야간 이동
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🚂 VR 산타 침대열차</span>
+              <span class="stay-pill p-purple">열차 1박</span>
+            </div>
+            <div class="region-date">📅 1.26 (수) ~ 1.27 (목)</div>
+            <div class="region-hotel">
+              <strong>🛏️ 2층 디럭스 침대칸</strong><br>
+              프라이빗 샤워실·화장실 Ensuite, 설원 야간 이동
+            </div>
+          </div>
+          <div class="region-move">
+            🎅 1.27 07:28 로바니에미역 도착 즉시 산타마을 직행
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🎅 로바니에미</span>
+              <span class="stay-pill p-gold">3박 4일</span>
+            </div>
+            <div class="region-date">📅 1.27 (목) ~ 1.30 (일)</div>
+            <div class="region-hotel">
+              <strong>✨ 산타스 이글루스 1박 + 부티크 2박</strong><br>
+              설날(1/27) 밤 통유리 침대 위 오로라 + 허스키 사파리
+            </div>
+          </div>
+          <div class="region-move">
+            🚐 1.30 오전 설원 고속버스(3.5h)로 사리셀카 직행
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🌌 사리셀카</span>
+              <span class="stay-pill p-green">★ 5연박 힐링</span>
+            </div>
+            <div class="region-date">📅 1.30 (일) ~ 2.4 (금)</div>
+            <div class="region-hotel">
+              <strong>🏡 장작 벽난로 & 사우나 통나무 샬레</strong><br>
+              짐 이동 0회, 유럽 최장 1.8km 썰매, 스모크 사우나
+            </div>
+          </div>
+          <div class="region-move">
+            🚌 2.4 오전 로컬 버스(40m)로 최북단 이나리 호수 이동
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🏔️ 이나리 호수 (NEW)</span>
+              <span class="stay-pill">★ 2박 3일</span>
+            </div>
+            <div class="region-date">📅 2.4 (금) ~ 2.6 (일)</div>
+            <div class="region-hotel">
+              <strong>🌌 호수 뷰 오로라 캐빈</strong><br>
+              북위 69° 윌더니스 호텔, 시다 사미 국립박물관 도보권
+            </div>
+          </div>
+          <div class="region-move">
+            ✈️ 2.6 버스(40m) ➔ 이발로 공항 ➔ 헬싱키 국내선(1.5h)
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🏰 탈린 (에스토니아)</span>
+              <span class="stay-pill p-red">★ 4박 5일</span>
+            </div>
+            <div class="region-date">📅 2.6 (일) ~ 2.10 (목)</div>
+            <div class="region-hotel">
+              <strong>🏰 중세 구시가지 성벽 부티크 호텔</strong><br>
+              핀란드 절반 물가, 라헤마 국립공원(얼음 폭포·장원) 투어
+            </div>
+          </div>
+          <div class="region-move">
+            🚢 2.10 오전 쾌속 페리(2h)로 헬싱키 서항 복귀
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🇫🇮 헬싱키 (마무리)</span>
+              <span class="stay-pill">2박 3일</span>
+            </div>
+            <div class="region-date">📅 2.10 (목) ~ 2.12 (토)</div>
+            <div class="region-hotel">
+              <strong>🏨 5성급 부티크 (캄프/세인트조지)</strong><br>
+              뢰윌뤼 바다 사우나, 수오멘린나 요새, 디자인 쇼핑
+            </div>
+          </div>
+          <div class="region-move">
+            🛫 2.12 17:30 핀에어 직항 귀국편 탑승
+          </div>
+        </div>
+
+        <div class="region-card">
+          <div>
+            <div class="region-card-head">
+              <span class="region-name">🏠 귀국 & 집 휴식</span>
+              <span class="stay-pill">기내1박 + 집2일</span>
+            </div>
+            <div class="region-date">📅 2.12 (토) ~ 2.14 (월)</div>
+            <div class="region-hotel">
+              <strong>🛋️ 내 집에서 이틀간 완벽 완충</strong><br>
+              2.13(일) 낮 인천 도착 ➔ 일·월 푹 쉬고 2.15(화) 출근!
+            </div>
+          </div>
+          <div class="region-move">
+            💼 2.15 (화) 상쾌하게 일상 복귀 완료
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- 3. 교통 -->
