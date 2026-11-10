@@ -820,6 +820,211 @@
         font-size: 0.8rem;
       }
     }
+
+    /* Region Stay & Moving Timeline */
+    .timeline-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+    }
+
+    .timeline-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .timeline-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .gantt-bar-wrap {
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 22px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .gantt-bar {
+      display: flex;
+      min-width: 680px;
+      height: 52px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+    }
+
+    .gantt-segment {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      line-height: 1.25;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+      transition: filter 0.2s;
+    }
+    .gantt-segment:last-child {
+      border-right: none;
+    }
+    .gantt-segment:hover {
+      filter: brightness(1.2);
+    }
+    .gantt-segment .seg-nights {
+      font-size: 0.7rem;
+      opacity: 0.9;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .seg-helsinki-1 { width: 6%; background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .seg-tallinn    { width: 16%; background: linear-gradient(135deg, #ef4444, #b91c1c); }
+    .seg-train      { width: 6%; background: linear-gradient(135deg, #a855f7, #7e22ce); }
+    .seg-rovaniemi  { width: 16%; background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .seg-saariselka { width: 30%; background: linear-gradient(135deg, #10b981, #047857); }
+    .seg-helsinki-4 { width: 20%; background: linear-gradient(135deg, #38bdf8, #0284c7); }
+    .seg-home       { width: 6%; background: linear-gradient(135deg, #64748b, #475569); }
+
+    .gantt-moves {
+      display: flex;
+      min-width: 680px;
+      justify-content: space-between;
+      margin-top: 8px;
+      padding: 0 4px;
+    }
+
+    .gantt-move-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: var(--aurora-cyan);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .region-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .region-card {
+      background: rgba(22, 32, 54, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .region-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .region-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .region-name {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stay-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      background: rgba(52, 211, 153, 0.18);
+      color: var(--aurora-green);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      white-space: nowrap;
+    }
+
+    .region-date {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .region-hotel {
+      font-size: 0.82rem;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+    .region-hotel strong {
+      color: #fff;
+    }
+
+    .region-move-box {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      line-height: 1.4;
+    }
+    .region-move-box .move-tag {
+      display: inline-block;
+      color: var(--aurora-cyan);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .region-move-box .move-desc {
+      color: #cbd5e1;
+    }
+
+    .day-transit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--aurora-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .day-transit-badge.combo {
+      background: rgba(251, 191, 36, 0.18);
+      color: var(--gold);
+      border-color: rgba(251, 191, 36, 0.45);
+    }
   </style>
 </head>
 <body>
@@ -901,17 +1106,270 @@
 
           <div class="vacation-item">
             <h4>✨ 20일 일정의 특급 장점</h4>
-            <p><strong>오로라 존 8박</strong> 체류로 관측률 98%↑</p>
-            <div class="sub-text">쫓기는 4박 5일 대신 사리셀카 5박+로바니에미 3박으로 오로라와 탈린 중세를 모두 여유롭게 누림!</div>
+            <p><strong>오로라 존 9박</strong> 체류로 관측률 98%↑</p>
+            <div class="sub-text">쫓기는 4박 대신 사리셀카 6연박+로바니에미 3박으로 오로라와 탈린 중세를 모두 여유롭게 누림!</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. 왜 이 조합인가? -->
+    <!-- 2. 한눈에 보는 지역별 체류 기간 & 이동 타임라인 -->
     <section>
       <div class="section-header">
-        <h2 class="section-title">🌌 2. 핀란드 설원 + 에스토니아 중세 마을 시너지</h2>
+        <h2 class="section-title">📍 2. 지역별 체류 기간 &amp; 이동 일정 한눈에 보기</h2>
+      </div>
+      <p class="section-desc">
+        어느 지역에서 며칠씩 묵고 언제 어디로 이동하는지 20일 전체 동선과 숙박 일정을 한눈에 파악할 수 있도록 정리했습니다.
+      </p>
+
+      <!-- 비주얼 간트 타임라인 바 -->
+      <div class="timeline-container">
+        <div class="timeline-title">
+          <span>📊</span> 20일 전체 일정 도시별 체류 비주얼 타임라인
+        </div>
+        <div class="timeline-subtitle">
+          도시별 숙박 박수와 이동 수단(페리·침대열차·설원버스·비행기) 한눈에 확인
+        </div>
+
+        <div class="gantt-bar-wrap">
+          <div class="gantt-bar">
+            <div class="gantt-segment seg-helsinki-1" title="헬싱키 1박 (1.25~1.26)">
+              <span>헬싱키</span>
+              <span class="seg-nights">1박</span>
+            </div>
+            <div class="gantt-segment seg-tallinn" title="에스토니아 탈린 3박 (1.26~1.29)">
+              <span>탈린 (에스토니아)</span>
+              <span class="seg-nights">3박 (중세 마을)</span>
+            </div>
+            <div class="gantt-segment seg-train" title="VR 산타 침대열차 1박 (1.29~1.30)">
+              <span>침대열차</span>
+              <span class="seg-nights">1박</span>
+            </div>
+            <div class="gantt-segment seg-rovaniemi" title="로바니에미 3박 (1.30~2.2)">
+              <span>로바니에미</span>
+              <span class="seg-nights">3박 (이글루 1박+2박)</span>
+            </div>
+            <div class="gantt-segment seg-saariselka" title="사리셀카 6박 연박 (2.2~2.8)">
+              <span>사리셀카 (최북단 오로라 숲속)</span>
+              <span class="seg-nights">★ 6연박 힐링 (장작 벽난로 샬레)</span>
+            </div>
+            <div class="gantt-segment seg-helsinki-4" title="헬싱키 4박 연박 (2.8~2.12)">
+              <span>헬싱키 도심</span>
+              <span class="seg-nights">★ 4연박 (부티크 5성)</span>
+            </div>
+            <div class="gantt-segment seg-home" title="귀국 & 집 휴식 (2.12~2.14)">
+              <span>귀국·휴식</span>
+              <span class="seg-nights">기내1박+집2일</span>
+            </div>
+          </div>
+
+          <!-- 이동 날짜 마커 -->
+          <div class="gantt-moves">
+            <span class="gantt-move-pill">🚢 1.26 페리(2h)</span>
+            <span class="gantt-move-pill" style="border-color: rgba(251, 191, 36, 0.4); color: var(--gold);">★ 1.29 이동묶기 (페리+야간기차)</span>
+            <span class="gantt-move-pill">🚐 2.2 설원버스(3.5h)</span>
+            <span class="gantt-move-pill">🛫 2.8 제트기(1.5h)</span>
+            <span class="gantt-move-pill">✈️ 2.12 귀국직항</span>
+          </div>
+        </div>
+
+        <!-- 6대 거점 지역별 체류 카드 -->
+        <div class="region-cards-grid">
+          <!-- 1. 헬싱키 1박 -->
+          <div class="region-card">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name">🇫🇮 헬싱키 (입국)</span>
+                <span class="stay-pill">1박 2일</span>
+              </div>
+              <div class="region-date">📅 1.25 (화) ~ 1.26 (수)</div>
+              <div class="region-hotel">
+                <strong>🏨 헬싱키 중앙역 부티크 4성 호텔</strong><br>
+                인천 직항 도착 후 시차 적응 및 북유럽 도심 산책
+              </div>
+            </div>
+            <div class="region-move-box">
+              <span class="move-tag">🚀 다음 이동: 1.26 (수, 설연휴)</span>
+              <div class="move-desc">오후 헬싱키 서항 ➔ <strong>에스토니아 탈린</strong>행 대형 쾌속 페리(탈링크) 탑승 (편도 2시간)</div>
+            </div>
+          </div>
+
+          <!-- 2. 탈린 3박 -->
+          <div class="region-card" style="border-color: rgba(248, 113, 113, 0.35);">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name" style="color: #fca5a5;">🇪🇪 탈린 (중세 구시가지)</span>
+                <span class="stay-pill" style="background: rgba(248, 113, 113, 0.18); color: #f87171; border-color: rgba(248, 113, 113, 0.4);">3박 4일</span>
+              </div>
+              <div class="region-date">📅 1.26 (수) ~ 1.29 (토)</div>
+              <div class="region-hotel">
+                <strong>🏰 탈린 구시가지 고풍 성벽 부티크 호텔</strong><br>
+                유네스코 중세 마을 투어, 촛불 디너, 착한 물가 미식 &amp; 카페
+              </div>
+            </div>
+            <div class="region-move-box" style="border-color: rgba(251, 191, 36, 0.4);">
+              <span class="move-tag" style="color: var(--gold);">★ 다음 이동: 1.29 (토, 이동 묶기 데이)</span>
+              <div class="move-desc">17시 페리(2h) ➔ 헬싱키 중앙역 저녁 ➔ <strong>밤 23시 북극행 VR 산타 침대열차 탑승! (호텔 짐싸기 1회 삭제)</strong></div>
+            </div>
+          </div>
+
+          <!-- 3. 산타 침대열차 1박 -->
+          <div class="region-card" style="border-color: rgba(192, 132, 252, 0.35);">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name" style="color: #d8b4fe;">🚂 VR 산타 침대열차</span>
+                <span class="stay-pill" style="background: rgba(192, 132, 252, 0.18); color: var(--aurora-purple); border-color: rgba(192, 132, 252, 0.4);">기차 1박</span>
+              </div>
+              <div class="region-date">📅 1.29 (토) 밤 ~ 1.30 (일) 아침</div>
+              <div class="region-hotel">
+                <strong>🛏️ 2층 상단 전용 디럭스 2인 침대칸</strong><br>
+                객실 내 전용 샤워실·화장실 완비! 기차 안에서 자며 북극권 이동
+              </div>
+            </div>
+            <div class="region-move-box">
+              <span class="move-tag">🚀 도착 &amp; 체크인: 1.30 (일) 10:50</span>
+              <div class="move-desc">로바니에미역 도착 ➔ <strong>산타마을 도보 5분 이글루</strong> 체크인(짐보관)</div>
+            </div>
+          </div>
+
+          <!-- 4. 로바니에미 3박 -->
+          <div class="region-card">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name">🎅 로바니에미 (산타마을)</span>
+                <span class="stay-pill">3박 4일</span>
+              </div>
+              <div class="region-date">📅 1.30 (일) ~ 2.2 (수)</div>
+              <div class="region-hotel">
+                <strong>✨ 산타마을 도보 5분 이글루 1박 + 도심 부티크 2박</strong><br>
+                침대 위 통유리 오로라 관측, 산타 독대, 허스키 사파리, 스노모빌
+              </div>
+            </div>
+            <div class="region-move-box">
+              <span class="move-tag">🚀 다음 이동: 2.2 (수) 오전</span>
+              <div class="move-desc">로바니에미 ➔ <strong>사리셀카</strong>행 라플란드 설원 고속 리무진 버스 탑승 (3시간 30분, 250km)</div>
+            </div>
+          </div>
+
+          <!-- 5. 사리셀카 6박 연박 -->
+          <div class="region-card" style="border-color: rgba(52, 211, 153, 0.45); background: linear-gradient(180deg, rgba(22, 32, 54, 0.8), rgba(6, 44, 30, 0.35));">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name" style="color: var(--aurora-green);">🌌 사리셀카 (최북단 오로라)</span>
+                <span class="stay-pill" style="background: rgba(52, 211, 153, 0.22); color: var(--aurora-green); border-color: rgba(52, 211, 153, 0.5);">★ 6박 7일 (6연박!)</span>
+              </div>
+              <div class="region-date">📅 2.2 (수) ~ 2.8 (화)</div>
+              <div class="region-hotel">
+                <strong>🔥 전통 통나무 샬레 6박 연속 연박</strong><br>
+                거실 장작 벽난로 &amp; 전용 사우나 &amp; 주방 완비! <strong>짐 옮기기 0회</strong>의 온전한 설원 힐링, 눈썰매, 국립공원 스노슈잉
+              </div>
+            </div>
+            <div class="region-move-box" style="border-color: rgba(52, 211, 153, 0.4);">
+              <span class="move-tag" style="color: var(--aurora-green);">🚀 다음 이동: 2.8 (화) 낮</span>
+              <div class="move-desc">사리셀카 ➔ 이발로공항 셔틀(30분) ➔ <strong>헬싱키행 핀에어 제트기 탑승 (단 1.5시간 만에 초고속 복귀!)</strong></div>
+            </div>
+          </div>
+
+          <!-- 6. 헬싱키 4박 연박 -->
+          <div class="region-card" style="border-color: rgba(56, 189, 248, 0.4);">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name" style="color: var(--aurora-cyan);">🏛️ 헬싱키 (도심 연박)</span>
+                <span class="stay-pill" style="background: rgba(56, 189, 248, 0.2); color: var(--aurora-cyan); border-color: rgba(56, 189, 248, 0.4);">★ 4박 5일 (4연박!)</span>
+              </div>
+              <div class="region-date">📅 2.8 (화) ~ 2.12 (토)</div>
+              <div class="region-hotel">
+                <strong>🏨 헬싱키 중심가 5성급 부티크 호텔 4연박</strong><br>
+                바다 앞 뢰윌뤼 사우나, 수오멘린나 요새, 마리메꼬 쇼핑, 파인다이닝
+              </div>
+            </div>
+            <div class="region-move-box">
+              <span class="move-tag">🚀 최종 귀국 이동: 2.12 (토) 저녁</span>
+              <div class="move-desc">17:30 헬싱키 반타공항 출발 ➔ <strong>인천행 핀에어 직항(AY041)</strong> 탑승 (11시간 45분)</div>
+            </div>
+          </div>
+
+          <!-- 7. 귀국 & 완충 휴식 -->
+          <div class="region-card" style="border-color: rgba(148, 163, 184, 0.35);">
+            <div>
+              <div class="region-card-head">
+                <span class="region-name">🏡 인천 도착 &amp; 완충 휴식</span>
+                <span class="stay-pill" style="background: rgba(148, 163, 184, 0.18); color: #cbd5e1; border-color: rgba(148, 163, 184, 0.35);">기내 1박 + 집 휴식 2일</span>
+              </div>
+              <div class="region-date">📅 2.13 (일) 오전 ~ 2.14 (월)</div>
+              <div class="region-hotel">
+                <strong>🛋️ 집에서 달콤한 시차 적응 &amp; 피로 완충</strong><br>
+                2.13(일) 오전 11:15 귀국 후 이틀간 집에서 푹 자고 힐링 완료
+              </div>
+            </div>
+            <div class="region-move-box">
+              <span class="move-tag">🎉 출근 복귀: 2.15 (화)</span>
+              <div class="move-desc">월요병 없이 산뜻하고 활기찬 컨디션으로 일상 복귀!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5대 이동 스케줄 요약 테이블 -->
+        <h3 style="color: #fff; font-size: 0.98rem; margin: 18px 0 10px; display: flex; align-items: center; gap: 8px;">
+          <span>🚆</span> 20일 여정 5대 핵심 이동 일정 요약표
+        </h3>
+        <div class="table-container" style="margin-bottom: 0;">
+          <table>
+            <thead>
+              <tr>
+                <th>이동일 (날짜)</th>
+                <th>출발 ➔ 도착 구간</th>
+                <th>이동 수단</th>
+                <th>소요 시간</th>
+                <th>핵심 탑승 팁 &amp; 체크포인트</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1.26 (수, 설연휴)</strong></td>
+                <td>헬싱키 ➔ 탈린</td>
+                <td>🚢 탈링크 대형 쾌속 페리</td>
+                <td>편도 2시간 (80km)</td>
+                <td>서항 T2 탑승, 솅겐 무비자 간편 입국, 얼음 바다 뷰 라운지</td>
+              </tr>
+              <tr style="background: rgba(251, 191, 36, 0.08);">
+                <td><strong style="color: var(--gold);">1.29 (토) ★ 이동묶기</strong></td>
+                <td>탈린 ➔ 헬싱키 ➔ 로바니에미</td>
+                <td>🚢 페리 (2h) + 🚂 VR 산타 침대열차</td>
+                <td>당일 원스톱 (11.5h 밤 이동)</td>
+                <td>탈린 17시 페리 ➔ 헬싱키 중앙역 저녁 ➔ 밤 23시 2층 디럭스 기차 탑승 (중간 호텔 1박 삭제!)</td>
+              </tr>
+              <tr>
+                <td><strong>2.2 (수)</strong></td>
+                <td>로바니에미 ➔ 사리셀카</td>
+                <td>🚐 마트카후올토 설원 리무진 버스</td>
+                <td>3시간 30분 (250km)</td>
+                <td>산타마을/중앙역 ➔ 칵슬라우타넨 &amp; 사리셀카 샬레 정문 바로 앞 직행 하차</td>
+              </tr>
+              <tr>
+                <td><strong>2.8 (화)</strong></td>
+                <td>사리셀카 ➔ 헬싱키</td>
+                <td>🚌 셔틀(30m) + 🛫 핀에어 국내선</td>
+                <td>총 약 2시간 (930km)</td>
+                <td>이발로 공항 직항 제트기 탑승, 800km 설원 종단을 1.5시간 만에 주파해 피로 제로</td>
+              </tr>
+              <tr>
+                <td><strong>2.12 (토)</strong></td>
+                <td>헬싱키 ➔ 인천</td>
+                <td>✈️ 핀에어 정규 직항 (AY041)</td>
+                <td>11시간 45분 (단축)</td>
+                <td>17:30 출발 ➔ 2.13(일) 11:15 인천 도착, 편서풍 제트기류로 비행 시간 단축</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 왜 이 조합인가? -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">🌌 3. 핀란드 설원 + 에스토니아 중세 마을 시너지</h2>
       </div>
       <p class="section-desc">
         20일의 넉넉한 일정 덕분에 핀란드 북극권 설원 오로라 헌팅과 발트해 건너 에스토니아 탈린의 중세 동화 마을을 시간에 쫓기지 않고 완벽하게 누립니다.
@@ -958,7 +1416,7 @@
     <!-- 3. 교통 & 이동망 -->
     <section>
       <div class="section-header">
-        <h2 class="section-title">🚆 3. 완벽 교통 & 이동망 (그림 경로도 & 구간별 팩트 가이드)</h2>
+        <h2 class="section-title">🚆 4. 완벽 교통 & 이동망 (그림 경로도 & 구간별 팩트 가이드)</h2>
       </div>
       <p class="section-desc">
         빙판길 렌터카 운전의 위험과 피로를 완전히 없애고, <strong>핀에어 최단 직항 + 발트해 초대형 크루즈 + VR 2층 산타 침대열차 + 라플란드 설원 고속버스 + 국내선 제트기</strong>를 하나의 유기적인 환상 루프로 연결한 안락한 동선입니다.
@@ -1557,7 +2015,7 @@
     <!-- 4. 마스터 20일 상세 일정표 -->
     <section>
       <div class="section-header">
-        <h2 class="section-title">✈️ 4. 2028 마스터 20일 상세 일정표 (설 연휴 & 안식휴가 대장정)</h2>
+        <h2 class="section-title">✈️ 5. 2028 마스터 20일 상세 일정표 (설 연휴 & 안식휴가 대장정)</h2>
       </div>
       <p class="section-desc">
         1월 25일 출발부터 2월 12~13일 귀국, 14일 휴식까지 하루하루 알차게 구성된 마스터 데일리 플랜입니다.
@@ -1586,6 +2044,7 @@
               <span class="day-num tallinn">Day 2</span>
               <span class="day-date">1.26 (수, 설연휴)</span>
               <span class="day-title">발트해 쾌속 크루즈 ➔ 에스토니아 탈린 입성</span>
+              <span class="day-transit-badge">🚢 페리 이동 (2h)</span>
             </div>
             <span class="day-stay tallinn">탈린 구시가지 부티크 1박</span>
           </div>
@@ -1631,6 +2090,7 @@
               <span class="day-num" style="background: rgba(248, 113, 113, 0.2); color: var(--tallinn-red);">Day 5</span>
               <span class="day-date">1.29 (토)</span>
               <span class="day-title">★ 이동 묶기 데이: 탈린 페리 ➔ 헬싱키 저녁 ➔ 산타 침대열차 탑승</span>
+              <span class="day-transit-badge combo">★ 당일 이동묶기 (페리+야간열차)</span>
             </div>
             <span class="day-stay" style="background: rgba(192, 132, 252, 0.2); color: var(--aurora-purple); border: 1px solid rgba(192, 132, 252, 0.4);">산타 침대열차 1박 (호텔 짐싸기 삭제!)</span>
           </div>
@@ -1691,6 +2151,7 @@
               <span class="day-num">Day 9</span>
               <span class="day-date">2.2 (수)</span>
               <span class="day-title">최북단 사리셀카 이동 ➔ 전통 통나무 샬레 체크인 (6연박 힐링)</span>
+              <span class="day-transit-badge">🚐 설원버스 이동 (3.5h)</span>
             </div>
             <span class="day-stay" style="background: rgba(52, 211, 153, 0.15); color: var(--aurora-green);">사리셀카 통나무 샬레 1박 (총 6연박 시작)</span>
           </div>
@@ -1781,6 +2242,7 @@
               <span class="day-num">Day 15</span>
               <span class="day-date">2.8 (화)</span>
               <span class="day-title">이발로 공항 ➔ 핀에어 국내선 ➔ 헬싱키 복귀 & 4박 연박 시작</span>
+              <span class="day-transit-badge">🛫 국내선 이동 (1.5h)</span>
             </div>
             <span class="day-stay">헬싱키 5성급 부티크 1박 (총 4박 연박)</span>
           </div>
@@ -1841,6 +2303,7 @@
               <span class="day-num">Day 19</span>
               <span class="day-date">2.12 (토)</span>
               <span class="day-title">헬싱키 반타 공항 출발 ➔ 인천행 비행기 탑승</span>
+              <span class="day-transit-badge">✈️ 귀국 직항 (11.5h)</span>
             </div>
             <span class="day-stay">기내 1박</span>
           </div>
@@ -1869,7 +2332,7 @@
     <!-- 5. 20일 기준 상세 실전 경비표 -->
     <section id="budget-section">
       <div class="section-header">
-        <h2 class="section-title">💶 5. 20일 기준 상세 실전 경비표 (2인 합계)</h2>
+        <h2 class="section-title">💶 6. 20일 기준 상세 실전 경비표 (2인 합계)</h2>
       </div>
       <p class="section-desc">
         설 연휴 성수기 항공권과 20일간의 여정을 현실적으로 반영한 2인 총예산입니다. 탈린 3박과 샬레 연박을 활용해 가성비와 낭만을 모두 잡았습니다.
@@ -2034,7 +2497,7 @@
     <!-- 6. 체크리스트 -->
     <section>
       <div class="section-header">
-        <h2 class="section-title">🎒 6. 2028 북극권 & 발트해 여행 체크리스트</h2>
+        <h2 class="section-title">🎒 7. 2028 북극권 & 발트해 여행 체크리스트</h2>
       </div>
       <div class="checklist-grid">
         <div class="check-card">
