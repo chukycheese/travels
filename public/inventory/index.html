@@ -370,6 +370,59 @@
       color: var(--badge-red-text);
     }
 
+        .policy-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      vertical-align: middle;
+      letter-spacing: -0.2px;
+    }
+
+    .policy-stockpile {
+      background: #edf5eb;
+      color: #386134;
+      border: 1px solid #d3e5cf;
+    }
+
+    .policy-ondemand {
+      background: #f1f3f7;
+      color: #4a5b78;
+      border: 1px solid #dbe1ec;
+    }
+
+    .status-badge.status-hold {
+      background: #fdf6ec;
+      color: #a0681c;
+      border: 1px dashed #e6c898;
+    }
+
+    .status-badge.status-discontinue {
+      background: #f2f2f2;
+      color: #777777;
+      border: 1px solid #dedede;
+      text-decoration: line-through;
+    }
+
+    .btn-quick-hold {
+      background: #fdf6ec;
+      border: 1px solid #e6c898;
+      color: #a0681c;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-quick-hold:hover {
+      background: #f7ebd7;
+    }
+
     .status-badge.status-keep {
       background: var(--badge-blue);
       color: var(--badge-blue-text);
@@ -802,6 +855,8 @@
   <!-- Category Filter Pills (공간 & 상태 필터) -->
   <div class="filter-scroll" id="filterSection">
     <button class="filter-pill active" data-filter="all">전체</button>
+    <button class="filter-pill" data-filter="stockpile">🔁 상시 비축</button>
+    <button class="filter-pill" data-filter="ondemand">🧴 단품·여유</button>
     <button class="filter-pill" data-filter="pantry">🥫 팬트리</button>
     <button class="filter-pill" data-filter="kitchen">🍳 주방</button>
     <button class="filter-pill" data-filter="dressroom">👔 드레스룸</button>
@@ -881,6 +936,14 @@
       </div>
 
       <div class="form-group">
+        <label class="form-label">비축 방식 (주영 님 꿀팁 💡)</label>
+        <select id="formStockPolicy" class="form-select">
+          <option value="stockpile">🔁 상시 필수 비축 (여분 필수 · 떨어지면 안 됨)</option>
+          <option value="ondemand">🧴 단품 사용 (여분 불필요 · 소진 시 천천히 구매)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
         <label class="form-label">세부 수납 위치 *</label>
         <input type="text" id="formSubLocation" class="form-input" placeholder="예: 2층 선반 B박스, 하부장 1번 서랍" required>
       </div>
@@ -892,6 +955,8 @@
             <option value="plenty">🟢 넉넉함</option>
             <option value="medium">🟡 보통</option>
             <option value="low">🔴 부족함 (장보기 추가)</option>
+            <option value="hold">⏸️ 구매 보류 (당분간 안 삼)</option>
+            <option value="discontinue">🚫 재구매 안 함</option>
             <option value="keep">📦 보관중</option>
           </select>
         </div>
@@ -939,9 +1004,10 @@
       space: "pantry",
       subLocation: "1층 바닥 대형 수납함",
       type: "consumable",
+      stockPolicy: "stockpile",
       status: "plenty",
       inCart: false,
-      memo: "코스트코 3겹 데코"
+      memo: "코스트코 3겹 데코 · 상시 필수 비축"
     },
     {
       id: "item-2",
@@ -1049,9 +1115,22 @@
       space: "bedroom",
       subLocation: "침실 협탁 2번째 서랍",
       type: "consumable",
+      stockPolicy: "stockpile",
       status: "plenty",
       inCart: false,
       memo: "겨울철 안방 적정 습도 50% 유지"
+    },
+    {
+      id: "item-12",
+      name: "헤어 트리트먼트",
+      spec: "200ml (거의 다 씀)",
+      space: "bath",
+      subLocation: "욕실 슬라이딩 거울장 1단",
+      type: "consumable",
+      stockPolicy: "ondemand",
+      status: "medium",
+      inCart: false,
+      memo: "주영 님 피드백 예시 품목 · 다 쓰고 천천히 구매 가능"
     }
   ];
 
@@ -1068,13 +1147,38 @@
 
   // State
   let items = JSON.parse(localStorage.getItem('our_home_items') || 'null') || DEFAULT_ITEMS;
-  // Migrate any legacy '안방 욕실' strings from localStorage
+  // Migrate any legacy '안방 욕실' strings and backfill stockPolicy
   items = items.map(item => {
     if (item.subLocation && item.subLocation.includes('안방 욕실')) {
       item.subLocation = item.subLocation.replace('안방 욕실', '욕실');
     }
+    if (!item.stockPolicy) {
+      if (item.type === 'keep') {
+        item.stockPolicy = 'keep';
+      } else if (item.name.includes('커피') || item.name.includes('트리트먼트')) {
+        item.stockPolicy = 'ondemand';
+      } else {
+        item.stockPolicy = 'stockpile';
+      }
+    }
     return item;
   });
+
+  // Ensure sample treatment item exists if not present
+  if (!items.some(i => i.name.includes('트리트먼트'))) {
+    items.push({
+      id: "item-12",
+      name: "헤어 트리트먼트",
+      spec: "200ml (거의 다 씀)",
+      space: "bath",
+      subLocation: "욕실 슬라이딩 거울장 1단",
+      type: "consumable",
+      stockPolicy: "ondemand",
+      status: "medium",
+      inCart: false,
+      memo: "주영 님 피드백 예시 품목 · 다 쓰고 천천히 구매 가능"
+    });
+  }
   let activeTab = 'inventory'; // 'inventory' | 'spaces' | 'shopping'
   let activeFilter = 'all';
   let searchQuery = '';
@@ -1092,7 +1196,7 @@
   }
 
   function updateCartBadge() {
-    const cartCount = items.filter(i => i.inCart || i.status === 'low' || i.status === 'empty').length;
+    const cartCount = items.filter(i => (i.inCart || i.status === 'low' || i.status === 'empty') && i.status !== 'hold' && i.status !== 'discontinue').length;
     const badge = document.getElementById('cartBadge');
     if (cartCount > 0) {
       badge.textContent = cartCount;
@@ -1145,9 +1249,14 @@
 
   function renderInventoryList(container) {
     let filtered = items.filter(item => {
-      // Space/Status filter
+      // Space/Status/Policy filter
       if (activeFilter === 'low') {
         if (item.status !== 'low' && item.status !== 'empty' && !item.inCart) return false;
+        if (item.status === 'hold' || item.status === 'discontinue') return false;
+      } else if (activeFilter === 'stockpile') {
+        if (item.stockPolicy !== 'stockpile') return false;
+      } else if (activeFilter === 'ondemand') {
+        if (item.stockPolicy !== 'ondemand') return false;
       } else if (activeFilter !== 'all') {
         if (item.space !== activeFilter) return false;
       }
@@ -1187,18 +1296,26 @@
         plenty: '🟢 넉넉함',
         medium: '🟡 보통',
         low: '🔴 부족함 (장보기)',
+        hold: '⏸️ 구매 보류',
+        discontinue: '🚫 재구매 안함',
         empty: '⛔ 품절/소진',
         keep: '📦 보관용품'
       }[item.status] || '보관중';
 
-      const inCart = item.inCart || item.status === 'low' || item.status === 'empty';
+      const inCart = (item.inCart || item.status === 'low' || item.status === 'empty') && item.status !== 'hold' && item.status !== 'discontinue';
+
+      const policyBadge = (item.type === 'keep') ? '' : (
+        item.stockPolicy === 'ondemand'
+          ? '<span class="policy-badge policy-ondemand">🧴 단품·여유</span>'
+          : '<span class="policy-badge policy-stockpile">🔁 상시 비축</span>'
+      );
 
       return `
         <div class="item-card" data-id="${item.id}">
           <div class="item-main-row">
             <div class="item-info">
               <div class="item-name">
-                ${item.name}
+                ${item.name} ${policyBadge}
               </div>
               <div class="item-spec">${item.spec || ''}</div>
               <div class="location-chip" onclick="filterBySpace('${item.space}')">
@@ -1254,7 +1371,7 @@
   }
 
   function renderShoppingList(container) {
-    const cartItems = items.filter(i => i.inCart || i.status === 'low' || i.status === 'empty');
+    const cartItems = items.filter(i => (i.inCart || i.status === 'low' || i.status === 'empty') && i.status !== 'hold' && i.status !== 'discontinue');
     document.getElementById('itemCount').textContent = cartItems.length + '개';
 
     if (cartItems.length === 0) {
@@ -1289,9 +1406,14 @@
               </div>
             </div>
           </div>
-          <button class="btn-quick-buy" onclick="completePurchase('${item.id}')">
-            구매완료
-          </button>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <button class="btn-quick-hold" onclick="holdPurchase('${item.id}')" title="이번엔 사지 않고 구매 보류">
+              ⏸️ 보류
+            </button>
+            <button class="btn-quick-buy" onclick="completePurchase('${item.id}')">
+              구매완료
+            </button>
+          </div>
         </div>
       `).join('')}
     `;
@@ -1316,9 +1438,13 @@
       item.inCart = true;
       showToast(`🔴 '${item.name}' 부족함! 장보기에 자동 담김`);
     } else if (item.status === 'low') {
-      item.status = 'empty';
-      item.inCart = true;
-      showToast(`⛔ '${item.name}' 소진 상태! 장보기에 담김`);
+      item.status = 'hold';
+      item.inCart = false;
+      showToast(`⏸️ '${item.name}' 구매 보류로 전환 (장보기 제외)`);
+    } else if (item.status === 'hold') {
+      item.status = 'discontinue';
+      item.inCart = false;
+      showToast(`🚫 '${item.name}' 재구매 안 함으로 표시`);
     } else {
       item.status = 'plenty';
       item.inCart = false;
@@ -1352,6 +1478,17 @@
     item.status = 'plenty';
     item.inCart = false;
     showToast(`🎉 '${item.name}' 구매 완료! 넉넉함으로 채웠어요`);
+    saveItems();
+    render();
+  }
+
+  function holdPurchase(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    item.status = 'hold';
+    item.inCart = false;
+    showToast(`⏸️ '${item.name}' 구매 보류! 장보기에서 뺐어요`);
     saveItems();
     render();
   }
@@ -1439,6 +1576,7 @@
       const space = document.getElementById('formSpace').value;
       const subLocation = document.getElementById('formSubLocation').value.trim();
       const type = document.getElementById('formType').value;
+      const stockPolicy = document.getElementById('formStockPolicy') ? document.getElementById('formStockPolicy').value : 'stockpile';
       const status = document.getElementById('formStatus').value;
       const spec = document.getElementById('formSpec').value.trim();
       const memo = document.getElementById('formMemo').value.trim();
@@ -1449,10 +1587,11 @@
         space,
         subLocation,
         type,
+        stockPolicy: (type === 'keep') ? 'keep' : stockPolicy,
         status,
         spec,
         memo,
-        inCart: (status === 'low' || status === 'empty')
+        inCart: (status === 'low' || status === 'empty') && status !== 'hold' && status !== 'discontinue'
       };
 
       items.unshift(newItem);
