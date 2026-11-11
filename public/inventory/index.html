@@ -857,7 +857,7 @@
     <button class="filter-pill active" data-filter="all">전체</button>
     <button class="filter-pill" data-filter="stockpile">🔁 상시 비축</button>
     <button class="filter-pill" data-filter="ondemand">🧴 단품·여유</button>
-    <button class="filter-pill" data-filter="pantry">🥫 팬트리</button>
+    <button class="filter-pill" data-filter="pantry">🥫 팬트리 (서재)</button>
     <button class="filter-pill" data-filter="kitchen">🍳 주방</button>
     <button class="filter-pill" data-filter="dressroom">👔 드레스룸</button>
     <button class="filter-pill" data-filter="bath">🛁 욕실</button>
@@ -916,7 +916,7 @@
         <div class="form-group">
           <label class="form-label">공간 *</label>
           <select id="formSpace" class="form-select" required>
-            <option value="pantry">🥫 팬트리</option>
+            <option value="pantry">🥫 팬트리 (서재 안)</option>
             <option value="kitchen">🍳 주방</option>
             <option value="dressroom">👔 드레스룸</option>
             <option value="bath">🛁 욕실</option>
@@ -1073,7 +1073,7 @@
       name: "치약 여분 (센소다인)",
       spec: "100g 3개입 번들",
       space: "bath",
-      subLocation: "욕실 슬라이딩 거울장 2단",
+      subLocation: "욕실 슬라이딩 거울장 (좌측 칸)",
       type: "consumable",
       status: "plenty",
       inCart: false,
@@ -1129,7 +1129,7 @@
       name: "헤어 트리트먼트",
       spec: "200ml (거의 다 씀)",
       space: "bath",
-      subLocation: "욕실 슬라이딩 거울장 1단",
+      subLocation: "욕실 슬라이딩 거울장 (우측 칸)",
       type: "consumable",
       stockPolicy: "ondemand",
       status: "medium",
@@ -1204,9 +1204,9 @@
       ]
     },
     pantry: {
-      name: "팬트리",
+      name: "팬트리 (서재 안)",
       icon: "🥫",
-      desc: "식료품, 생활소모품, 비상 잡화",
+      desc: "서재 방 안에 위치한 핵심 살림 팬트리 (식료품 · 생필품 · 잡화)",
       statusBadge: "3개 구역",
       clusters: [
         {
@@ -1293,16 +1293,25 @@
     bath: {
       name: "욕실",
       icon: "🛁",
-      desc: "수건, 치약, 샴푸, 바디워시, 욕실세제",
-      statusBadge: "2개 구역",
+      desc: "수지 하우스 공용 욕실 실측 (슬라이딩 거울 욕실장 2칸 + 젠다이/샤워)",
+      statusBadge: "✨ 슬라이딩장 2칸 실측",
       clusters: [
         {
           id: "ba-mirror",
-          name: "🪞 슬라이딩 거울장",
-          desc: "욕실 상부 거울 수납장",
+          name: "🪞 슬라이딩 거울 욕실장 (2칸)",
+          desc: "좌측 거울장 1칸 + 우측 거울장 1칸 (내부 다단 선반)",
           slots: [
-            { id: "ba-1", name: "욕실 슬라이딩 거울장 1단", role: "헤어 트리트먼트, 스킨케어" },
-            { id: "ba-2", name: "욕실 슬라이딩 거울장 2단", role: "센소다인 치약, 여분 칫솔" }
+            { id: "ba-left", name: "욕실 슬라이딩 거울장 (좌측 칸)", role: "수건, 센소다인 치약 여분, 비누, 칫솔 리필 (세부 선반 사진 판정 대기 📷)" },
+            { id: "ba-right", name: "욕실 슬라이딩 거울장 (우측 칸)", role: "스킨케어, 헤어 트리트먼트, 면도기, 드라이기 (세부 선반 사진 판정 대기 📷)" }
+          ]
+        },
+        {
+          id: "ba-open",
+          name: "🚿 젠다이 선반 & 샤워 코너",
+          desc: "세면대 젠다이 상판 및 샤워 코너 상시 거치대",
+          slots: [
+            { id: "ba-ledge", name: "세면대 젠다이 선반", role: "핸드워시, 칫솔 스탠드, 폼클렌징" },
+            { id: "ba-corner", name: "샤워기 코너 선반", role: "샴푸, 바디워시, 트리트먼트" }
           ]
         }
       ]
@@ -1327,8 +1336,8 @@
     study: {
       name: "서재",
       icon: "💻",
-      desc: "전자기기, 케이블, 서류, 책",
-      statusBadge: "1개 구역",
+      desc: "서재 책장 (책 전용 · 일상 살림 수납은 서재 안 팬트리에서 관리)",
+      statusBadge: "책 전용 구역",
       clusters: [
         {
           id: "s-desk",
@@ -1384,7 +1393,7 @@
       name: "헤어 트리트먼트",
       spec: "200ml (거의 다 씀)",
       space: "bath",
-      subLocation: "욕실 슬라이딩 거울장 1단",
+      subLocation: "욕실 슬라이딩 거울장 (우측 칸)",
       type: "consumable",
       stockPolicy: "ondemand",
       status: "medium",
