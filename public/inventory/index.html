@@ -862,7 +862,7 @@
     <button class="filter-pill" data-filter="dressroom">👔 드레스룸</button>
     <button class="filter-pill" data-filter="bath">🛁 욕실</button>
     <button class="filter-pill" data-filter="bedroom">🛏️ 침실 (안방)</button>
-    <button class="filter-pill" data-filter="utility">🧺 다용도실</button>
+    <button class="filter-pill" data-filter="utility">🧺 앞베란다 (세탁실)</button>
     <button class="filter-pill" data-filter="study">💻 서재</button>
     <button class="filter-pill" data-filter="low">⚠️ 부족함</button>
   </div>
@@ -921,7 +921,7 @@
             <option value="dressroom">👔 드레스룸</option>
             <option value="bath">🛁 욕실</option>
             <option value="bedroom">🛏️ 침실 (안방)</option>
-            <option value="utility">🧺 다용도실</option>
+            <option value="utility">🧺 앞베란다 (세탁실)</option>
             <option value="study">💻 서재</option>
             <option value="etc">🚪 현관/기타</option>
           </select>
@@ -1095,7 +1095,7 @@
       name: "세탁세제 & 섬유유연제",
       spec: "캡슐세제 60알",
       space: "utility",
-      subLocation: "건조기 옆 슬림 수납타워 1층",
+      subLocation: "세탁기 옆/위 세제 선반",
       type: "consumable",
       status: "plenty",
       inCart: false,
@@ -1328,18 +1328,26 @@
       ]
     },
     utility: {
-      name: "다용도실",
+      name: "앞베란다 (세탁실)",
       icon: "🧺",
-      desc: "세탁기, 건조기, 공구함, 청소도구",
-      statusBadge: "2개 구역",
+      desc: "수지 하우스 앞베란다 실측 (세탁기·건조기 타워 & 세제류 수납)",
+      statusBadge: "✨ 앞베란다 실측 완료",
       clusters: [
         {
-          id: "u-washer",
-          name: "🧼 세탁기 & 타워 선반",
-          desc: "세탁 세제 및 공구함",
+          id: "u-washer-tower",
+          name: "🧼 세탁기 & 건조기 타워",
+          desc: "세탁기·건조기 본체 및 가전 주변 공간",
           slots: [
-            { id: "u-1", name: "세탁기 위 상부 철제선반", role: "보쉬 전동드릴 & 공구함" },
-            { id: "u-2", name: "건조기 옆 슬림 수납타워 1층", role: "캡슐세제, 섬유유연제" }
+            { id: "u-tower-appliance", name: "세탁기 & 건조기", role: "세탁기 내부, 건조기 먼지필터, 건조기 시트 보관" }
+          ]
+        },
+        {
+          id: "u-detergent",
+          name: "🧴 세탁세제 & 세탁용품 선반",
+          desc: "세탁세제, 섬유유연제, 세탁망 수납",
+          slots: [
+            { id: "u-det-shelf", name: "세탁기 옆/위 세제 선반", role: "캡슐세제, 액체세탁세제, 섬유유연제, 얼룩제거제 (세부 칸 사진 판정 대기 📷)" },
+            { id: "u-laundry-net", name: "세탁망 & 빨래바구니 코너", role: "사이즈별 세탁망, 빨래바구니, 분리수거용품" }
           ]
         }
       ]
