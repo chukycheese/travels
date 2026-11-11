@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>우리 집 칸 - 똑똑한 살림 & 수납 인벤토리</title>
+  <style>
+    :root {
+      --bg-cream: #f7f6f0;
+      --card-bg: #ffffff;
+      --primary: #456549;
+      --primary-light: #e8efe7;
+      --primary-dark: #324c35;
+      --text-main: #2b2f2c;
+      --text-sub: #767d74;
+      --border: #e6e8e2;
+      --badge-orange: #fff1e5;
+      --badge-orange-text: #d96b27;
+      --badge-red: #ffeaea;
+      --badge-red-text: #d33c3c;
+      --badge-blue: #e8f1fb;
+      --badge-blue-text: #2f6ebb;
+      --shadow: 0 2px 10px rgba(0,0,0,0.04);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      padding-bottom: 90px;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg-cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Top Nav */
+    header {
+      padding: 16px 20px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: rgba(247, 246, 240, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 50;
+    }
+
+    .app-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .app-logo {
+      width: 32px;
+      height: 32px;
+      background: var(--primary-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .app-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+    }
+
+    .app-badge-couple {
+      font-size: 11px;
+      background: #e2e8df;
+      color: var(--primary-dark);
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    /* Hero / Tab Headline */
+    .hero-banner {
+      padding: 12px 20px 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-sub);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      color: var(--text-main);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .hero-illu {
+      width: 72px;
+      height: 52px;
+      background: #fff8e8;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: inset 0 0 0 1px #faecd2;
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+      padding: 12px 20px 8px;
+    }
+
+    .search-box {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      transition: all 0.2s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 2px 10px rgba(69, 101, 73, 0.12);
+    }
+
+    .search-icon {
+      font-size: 16px;
+      color: var(--text-sub);
+      margin-right: 10px;
+    }
+
+    .search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+      color: var(--text-main);
+    }
+
+    .search-input::placeholder {
+      color: #9aa198;
+    }
+
+    .search-clear {
+      background: none;
+      border: none;
+      color: #b0b7ae;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+      padding: 2px;
+    }
+
+    /* Category Filter Pills */
+    .filter-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 8px 20px 14px;
+      scrollbar-width: none;
+    }
+
+    .filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      white-space: nowrap;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s;
+    }
+
+    .filter-pill.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(69, 101, 73, 0.25);
+    }
+
+    /* Section Header */
+    .section-head {
+      padding: 8px 20px 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-count {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .btn-add-item {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-add-item:hover {
+      background: #d9e5d7;
+    }
+
+    /* Content Area */
+    .content-area {
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Item Card */
+    .item-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .item-card:active {
+      transform: scale(0.99);
+    }
+
+    .item-main-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .item-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .item-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .item-spec {
+      font-size: 13px;
+      color: var(--text-sub);
+    }
+
+    /* Location Chip (Clickable) */
+    .location-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      background: #f1f3ee;
+      color: #3b4d3a;
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #e2e6de;
+      margin-top: 2px;
+      width: fit-content;
+      transition: all 0.15s;
+    }
+
+    .location-chip:hover {
+      background: #e3ebd0;
+    }
+
+    /* Status Pills */
+    .status-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      user-select: none;
+      transition: all 0.2s;
+    }
+
+    .status-badge.status-plenty {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .status-badge.status-medium {
+      background: #f0f3eb;
+      color: #5c6e59;
+    }
+
+    .status-badge.status-low {
+      background: var(--badge-orange);
+      color: var(--badge-orange-text);
+      animation: pulse 2s infinite;
+    }
+
+    .status-badge.status-empty {
+      background: var(--badge-red);
+      color: var(--badge-red-text);
+    }
+
+    .status-badge.status-keep {
+      background: var(--badge-blue);
+      color: var(--badge-blue-text);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.75; }
+    }
+
+    .item-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-sub);
+      border-top: 1px dashed #f0f2ed;
+      padding-top: 8px;
+      margin-top: 2px;
+    }
+
+    .btn-cart-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+
+    .btn-cart-toggle.in-cart {
+      background: #fef4ea;
+      color: #d96b27;
+      border-color: #f7d5b8;
+    }
+
+    /* Space Map View (공간 지도) */
+    .space-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .space-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .space-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .space-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .space-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .space-item-count {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 7px;
+      border-radius: 8px;
+    }
+
+    .space-slots {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .space-slot-item {
+      font-size: 12px;
+      color: var(--text-sub);
+      background: #f8f9f5;
+      padding: 4px 8px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Shopping List View */
+    .cart-summary-box {
+      background: linear-gradient(135deg, #eef5ed, #e6eee5);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #dbe6d9;
+      margin-bottom: 6px;
+    }
+
+    .cart-summary-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .cart-summary-count {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .cart-item-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .cart-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid #b5beaf;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .cart-checkbox.checked {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    .btn-quick-buy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .btn-quick-buy:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Empty State */
+    .empty-state {
+      background: var(--card-bg);
+      border: 1.5px dashed var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .empty-icon {
+      font-size: 42px;
+    }
+
+    .empty-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .empty-desc {
+      font-size: 13px;
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Bottom Navigation Bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+      z-index: 100;
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.03);
+    }
+
+    .nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      background: none;
+      border: none;
+      color: #8c9388;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 16px;
+      border-radius: 14px;
+      transition: all 0.18s;
+      position: relative;
+    }
+
+    .nav-tab.active {
+      color: var(--primary);
+      font-weight: 800;
+    }
+
+    .nav-tab-icon {
+      font-size: 20px;
+    }
+
+    .nav-badge {
+      position: absolute;
+      top: 2px;
+      right: 14px;
+      background: #e65100;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 10px;
+      min-width: 16px;
+      text-align: center;
+    }
+
+    /* Modal / Form */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 200;
+    }
+
+    .modal-sheet {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 480px;
+      border-radius: 24px 24px 0 0;
+      padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #9aa198;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .form-input, .form-select {
+      background: #f8f9f5;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 14px;
+      outline: none;
+      color: var(--text-main);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(69, 101, 73, 0.25);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(43, 47, 44, 0.95);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 300;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <header>
+    <div class="app-brand">
+      <div class="app-logo">칸</div>
+      <div class="app-title">우리 집 칸</div>
+      <span class="app-badge-couple">수지 하우스 🌿</span>
+    </div>
+    <div style="font-size: 12px; color: var(--text-sub); font-weight: 600;">
+      주영 & 교영
+    </div>
+  </header>
+
+  <!-- Hero Headline -->
+  <div class="hero-banner" id="heroBanner">
+    <div class="hero-subtitle">가볍게 기록하고 1초 만에 찾는</div>
+    <div class="hero-title">
+      <span id="heroTitleText">우리 집 재고</span>
+      <div class="hero-illu" id="heroIllu">🧺</div>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-wrapper" id="searchSection">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="어떤 물건이나 위치를 찾으세요? (초성 가능: ㅊㅇ)">
+      <button id="searchClear" class="search-clear">✕</button>
+    </div>
+  </div>
+
+  <!-- Category Filter Pills (공간 & 상태 필터) -->
+  <div class="filter-scroll" id="filterSection">
+    <button class="filter-pill active" data-filter="all">전체</button>
+    <button class="filter-pill" data-filter="pantry">🥫 팬트리</button>
+    <button class="filter-pill" data-filter="kitchen">🍳 주방</button>
+    <button class="filter-pill" data-filter="dressroom">👔 드레스룸</button>
+    <button class="filter-pill" data-filter="bath">🛁 욕실</button>
+    <button class="filter-pill" data-filter="bedroom">🛏️ 침실 (안방)</button>
+    <button class="filter-pill" data-filter="utility">🧺 다용도실</button>
+    <button class="filter-pill" data-filter="study">💻 서재</button>
+    <button class="filter-pill" data-filter="low">⚠️ 부족함</button>
+  </div>
+
+  <!-- Section Head -->
+  <div class="section-head" id="sectionHead">
+    <div class="section-title">
+      <span id="sectionLabel">우리 집 물건</span>
+      <span class="section-count" id="itemCount">0개</span>
+    </div>
+    <button class="btn-add-item" id="openAddModalBtn">+ 물건 추가</button>
+  </div>
+
+  <!-- Main Content Views -->
+  <main class="content-area" id="contentArea">
+    <!-- Dynamic item cards will be rendered here -->
+  </main>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-tab active" data-tab="inventory">
+      <span class="nav-tab-icon">📦</span>
+      <span>재고·물건</span>
+    </button>
+    <button class="nav-tab" data-tab="spaces">
+      <span class="nav-tab-icon">🗺️</span>
+      <span>수납 지도</span>
+    </button>
+    <button class="nav-tab" data-tab="shopping">
+      <span class="nav-tab-icon">🛒</span>
+      <span>장보기</span>
+      <span class="nav-badge" id="cartBadge" style="display: none;">0</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Modal: Add Item -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal-sheet">
+    <div class="modal-header">
+      <div class="modal-title">새 물건 등록</div>
+      <button class="modal-close" id="closeAddModalBtn">✕</button>
+    </div>
+    <form id="addItemForm">
+      <div class="form-group">
+        <label class="form-label">물건 이름 *</label>
+        <input type="text" id="formName" class="form-input" placeholder="예: 여분 롤휴지, 멀티어댑터, 종량제봉투" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">공간 *</label>
+          <select id="formSpace" class="form-select" required>
+            <option value="pantry">🥫 팬트리</option>
+            <option value="kitchen">🍳 주방</option>
+            <option value="dressroom">👔 드레스룸</option>
+            <option value="bath">🛁 욕실</option>
+            <option value="bedroom">🛏️ 침실 (안방)</option>
+            <option value="utility">🧺 다용도실</option>
+            <option value="study">💻 서재</option>
+            <option value="etc">🚪 현관/기타</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">성격</label>
+          <select id="formType" class="form-select">
+            <option value="consumable">소모품 (재고 관리)</option>
+            <option value="keep">영구 보관품 (위치 파악)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">세부 수납 위치 *</label>
+        <input type="text" id="formSubLocation" class="form-input" placeholder="예: 2층 선반 B박스, 하부장 1번 서랍" required>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">현재 상태</label>
+          <select id="formStatus" class="form-select">
+            <option value="plenty">🟢 넉넉함</option>
+            <option value="medium">🟡 보통</option>
+            <option value="low">🔴 부족함 (장보기 추가)</option>
+            <option value="keep">📦 보관중</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">수량 / 규격</label>
+          <input type="text" id="formSpec" class="form-input" placeholder="예: 30롤, 2개입, 20L">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">메모 / 구매 팁</label>
+        <input type="text" id="formMemo" class="form-input" placeholder="예: 10월 이마트 구매, 여분 케이블 동봉">
+      </div>
+
+      <button type="submit" class="btn-submit">우리 집에 쏙 담기</button>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast">메시지</div>
+
+<script>
+  // Chosung map for 1-second instant search
+  const CHOSUNG = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+  function getChosung(str) {
+    let result = '';
+    for (let i = 0; i < str.length; i++) {
+      const code = str.charCodeAt(i) - 44032;
+      if (code >= 0 && code <= 11171) {
+        result += CHOSUNG[Math.floor(code / 588)];
+      } else {
+        result += str.charAt(i);
+      }
+    }
+    return result;
+  }
+
+  // Initial Seed Data (수지 아파트 실생활 맞춤형)
+  const DEFAULT_ITEMS = [
+    {
+      id: "item-1",
+      name: "여분 롤휴지",
+      spec: "30롤 번들",
+      space: "pantry",
+      subLocation: "1층 바닥 대형 수납함",
+      type: "consumable",
+      status: "plenty",
+      inCart: false,
+      memo: "코스트코 3겹 데코"
+    },
+    {
+      id: "item-2",
+      name: "여행용 멀티어댑터 & 돼지코",
+      spec: "3구 일체형 2개",
+      space: "pantry",
+      subLocation: "2층 선반 B박스 (여행용품)",
+      type: "keep",
+      status: "keep",
+      inCart: false,
+      memo: "핀란드·유럽 여행용 C/F타입 포함"
+    },
+    {
+      id: "item-3",
+      name: "AA 건전지",
+      spec: "10개입 중 2개 남음",
+      space: "pantry",
+      subLocation: "2층 선반 B박스 (공구/잡화)",
+      type: "consumable",
+      status: "low",
+      inCart: true,
+      memo: "도어락 & 리모컨 비상용"
+    },
+    {
+      id: "item-4",
+      name: "종량제 봉투 20L",
+      spec: "용인 수지구 전용 (3장 남음)",
+      space: "kitchen",
+      subLocation: "싱크대 하부장 우측 2단 레일",
+      type: "consumable",
+      status: "low",
+      inCart: true,
+      memo: "이마트 장볼 때 묶음 구매 필수"
+    },
+    {
+      id: "item-5",
+      name: "주방세제 리필형",
+      spec: "1.2L 친환경 베이킹소다",
+      space: "kitchen",
+      subLocation: "싱크대 하부장 1번 바구니",
+      type: "consumable",
+      status: "medium",
+      inCart: false,
+      memo: "펌프 용기 채우고 절반 남음"
+    },
+    {
+      id: "item-6",
+      name: "전동드릴 & 비트 세트",
+      spec: "보쉬 12V + 부속 비트",
+      space: "utility",
+      subLocation: "세탁기 위 상부 철제선반",
+      type: "keep",
+      status: "keep",
+      inCart: false,
+      memo: "인테리어 조립용 / 완충 상태 보관"
+    },
+    {
+      id: "item-7",
+      name: "치약 여분 (센소다인)",
+      spec: "100g 3개입 번들",
+      space: "bath",
+      subLocation: "욕실 슬라이딩 거울장 2단",
+      type: "consumable",
+      status: "plenty",
+      inCart: false,
+      memo: "잇몸 케어용 번들"
+    },
+    {
+      id: "item-8",
+      name: "겨울 구스다운 압축팩",
+      spec: "대형 압축팩 2개",
+      space: "dressroom",
+      subLocation: "붙박이장 상단 선반 1번",
+      type: "keep",
+      status: "keep",
+      inCart: false,
+      memo: "오로라 여행 때 꺼낼 방한 외투"
+    },
+    {
+      id: "item-9",
+      name: "세탁세제 & 섬유유연제",
+      spec: "캡슐세제 60알",
+      space: "utility",
+      subLocation: "건조기 옆 슬림 수납타워 1층",
+      type: "consumable",
+      status: "plenty",
+      inCart: false,
+      memo: "실내건조용 라벤더향"
+    },
+    {
+      id: "item-10",
+      name: "네스프레소 커피캡슐",
+      spec: "디카페인 2줄 (20캡슐)",
+      space: "kitchen",
+      subLocation: "홈카페 아일랜드 상부장 1열",
+      type: "consumable",
+      status: "medium",
+      inCart: false,
+      memo: "주영 님 전용 저녁 커피"
+    },
+    {
+      id: "item-11",
+      name: "온습도계 & 가습기 필터",
+      spec: "여분 필터 2세트",
+      space: "bedroom",
+      subLocation: "침실 협탁 2번째 서랍",
+      type: "consumable",
+      status: "plenty",
+      inCart: false,
+      memo: "겨울철 안방 적정 습도 50% 유지"
+    }
+  ];
+
+  const SPACES = {
+    pantry: { name: "팬트리", icon: "🥫", desc: "식료품, 생활소모품, 비상 잡화" },
+    kitchen: { name: "주방", icon: "🍳", desc: "조리도구, 양념, 세제, 위생백" },
+    dressroom: { name: "드레스룸", icon: "👔", desc: "의류, 침구, 압축팩, 캐리어" },
+    bath: { name: "욕실", icon: "🛁", desc: "수건, 치약, 샴푸, 바디워시, 욕실세제" },
+    bedroom: { name: "침실 (안방)", icon: "🛏️", desc: "침구, 협탁 서랍, 가습기, 수면용품" },
+    utility: { name: "다용도실", icon: "🧺", desc: "세탁기, 건조기, 공구함, 청소도구" },
+    study: { name: "서재", icon: "💻", desc: "전자기기, 케이블, 서류, 책" },
+    etc: { name: "현관/기타", icon: "🚪", desc: "신발, 우산, 레저용품" }
+  };
+
+  // State
+  let items = JSON.parse(localStorage.getItem('our_home_items') || 'null') || DEFAULT_ITEMS;
+  // Migrate any legacy '안방 욕실' strings from localStorage
+  items = items.map(item => {
+    if (item.subLocation && item.subLocation.includes('안방 욕실')) {
+      item.subLocation = item.subLocation.replace('안방 욕실', '욕실');
+    }
+    return item;
+  });
+  let activeTab = 'inventory'; // 'inventory' | 'spaces' | 'shopping'
+  let activeFilter = 'all';
+  let searchQuery = '';
+
+  function saveItems() {
+    localStorage.setItem('our_home_items', JSON.stringify(items));
+    updateCartBadge();
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  function updateCartBadge() {
+    const cartCount = items.filter(i => i.inCart || i.status === 'low' || i.status === 'empty').length;
+    const badge = document.getElementById('cartBadge');
+    if (cartCount > 0) {
+      badge.textContent = cartCount;
+      badge.style.display = 'inline-block';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+
+  // Render Functions
+  function render() {
+    updateCartBadge();
+    const content = document.getElementById('contentArea');
+    const heroTitle = document.getElementById('heroTitleText');
+    const heroIllu = document.getElementById('heroIllu');
+    const searchSection = document.getElementById('searchSection');
+    const filterSection = document.getElementById('filterSection');
+    const sectionHead = document.getElementById('sectionHead');
+
+    if (activeTab === 'inventory') {
+      heroTitle.textContent = '우리 집 재고';
+      heroIllu.textContent = '🧺';
+      searchSection.style.display = 'block';
+      filterSection.style.display = 'flex';
+      sectionHead.style.display = 'flex';
+      document.getElementById('sectionLabel').textContent = '우리 집 물건';
+
+      renderInventoryList(content);
+    } else if (activeTab === 'spaces') {
+      heroTitle.textContent = '우리 집 수납 지도';
+      heroIllu.textContent = '🗺️';
+      searchSection.style.display = 'none';
+      filterSection.style.display = 'none';
+      sectionHead.style.display = 'flex';
+      document.getElementById('sectionLabel').textContent = '공간별 수납 구역';
+      document.getElementById('itemCount').textContent = Object.keys(SPACES).length + '개 구역';
+
+      renderSpaceMap(content);
+    } else if (activeTab === 'shopping') {
+      heroTitle.textContent = '우리 집 장보기';
+      heroIllu.textContent = '🛒';
+      searchSection.style.display = 'none';
+      filterSection.style.display = 'none';
+      sectionHead.style.display = 'flex';
+      document.getElementById('sectionLabel').textContent = '지금 살 물건';
+
+      renderShoppingList(content);
+    }
+  }
+
+  function renderInventoryList(container) {
+    let filtered = items.filter(item => {
+      // Space/Status filter
+      if (activeFilter === 'low') {
+        if (item.status !== 'low' && item.status !== 'empty' && !item.inCart) return false;
+      } else if (activeFilter !== 'all') {
+        if (item.space !== activeFilter) return false;
+      }
+
+      // Search query (keyword + Chosung)
+      if (searchQuery.trim() !== '') {
+        const q = searchQuery.toLowerCase().trim();
+        const nameMatch = item.name.toLowerCase().includes(q);
+        const locMatch = item.subLocation.toLowerCase().includes(q);
+        const memoMatch = item.memo && item.memo.toLowerCase().includes(q);
+        const chosungMatch = getChosung(item.name).includes(q) || getChosung(item.subLocation).includes(q);
+
+        return nameMatch || locMatch || memoMatch || chosungMatch;
+      }
+
+      return true;
+    });
+
+    document.getElementById('itemCount').textContent = filtered.length + '개';
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <div class="empty-title">찾으시는 물건이 없어요</div>
+          <div class="empty-desc">검색어나 필터를 변경해 보시거나,<br>새 물건을 등록해 보세요!</div>
+          <button class="btn-add-item" onclick="openAddModal()" style="padding: 10px 18px; margin-top: 6px;">+ 새 물건 담기</button>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(item => {
+      const spaceObj = SPACES[item.space] || SPACES.etc;
+      const statusClass = `status-${item.status}`;
+      const statusLabel = {
+        plenty: '🟢 넉넉함',
+        medium: '🟡 보통',
+        low: '🔴 부족함 (장보기)',
+        empty: '⛔ 품절/소진',
+        keep: '📦 보관용품'
+      }[item.status] || '보관중';
+
+      const inCart = item.inCart || item.status === 'low' || item.status === 'empty';
+
+      return `
+        <div class="item-card" data-id="${item.id}">
+          <div class="item-main-row">
+            <div class="item-info">
+              <div class="item-name">
+                ${item.name}
+              </div>
+              <div class="item-spec">${item.spec || ''}</div>
+              <div class="location-chip" onclick="filterBySpace('${item.space}')">
+                📍 <strong>${spaceObj.name}</strong> > ${item.subLocation}
+              </div>
+            </div>
+            <div class="status-badge ${statusClass}" onclick="cycleStatus('${item.id}')" title="클릭해서 상태 변경">
+              ${statusLabel}
+            </div>
+          </div>
+          <div class="item-footer">
+            <span>${item.memo ? '💡 ' + item.memo : '수지 하우스'}</span>
+            <button class="btn-cart-toggle ${inCart ? 'in-cart' : ''}" onclick="toggleCart('${item.id}')">
+              ${inCart ? '🛒 장보기에 담김' : '＋ 장보기 담기'}
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderSpaceMap(container) {
+    const spaceKeys = Object.keys(SPACES);
+
+    container.innerHTML = `
+      <div class="space-grid">
+        ${spaceKeys.map(key => {
+          const space = SPACES[key];
+          const spaceItems = items.filter(i => i.space === key);
+          const topLocations = [...new Set(spaceItems.map(i => i.subLocation.split('(')[0].trim()))].slice(0, 3);
+
+          return `
+            <div class="space-card" onclick="viewSpaceItems('${key}')">
+              <div class="space-header">
+                <div class="space-name">
+                  <span>${space.icon}</span>
+                  <span>${space.name}</span>
+                </div>
+                <span class="space-item-count">${spaceItems.length}개</span>
+              </div>
+              <div class="space-slots">
+                ${topLocations.length > 0 ? topLocations.map(loc => `
+                  <div class="space-slot-item">
+                    <span>• ${loc}</span>
+                  </div>
+                `).join('') : '<div class="space-slot-item" style="color:#b5baa8;">등록된 물건 없음</div>'}
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+  }
+
+  function renderShoppingList(container) {
+    const cartItems = items.filter(i => i.inCart || i.status === 'low' || i.status === 'empty');
+    document.getElementById('itemCount').textContent = cartItems.length + '개';
+
+    if (cartItems.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🛒</div>
+          <div class="empty-title">지금은 살 물건이 없어요</div>
+          <div class="empty-desc">재고가 부족해지면 여기에 자동으로 모아드릴게요.<br>평소엔 가볍게 보관 상태만 확인하세요!</div>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="cart-summary-box">
+        <div>
+          <div class="cart-summary-text">장보기 체크리스트</div>
+          <div style="font-size: 12px; color: var(--text-sub); margin-top: 2px;">구매 후 체크하면 재고가 '넉넉함'으로 채워져요</div>
+        </div>
+        <div class="cart-summary-count">${cartItems.length}개</div>
+      </div>
+      ${cartItems.map(item => `
+        <div class="cart-item-card">
+          <div class="cart-item-left">
+            <div class="cart-checkbox" onclick="completePurchase('${item.id}')" title="구매 완료 체크">
+              ✓
+            </div>
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: var(--text-main);">${item.name}</div>
+              <div style="font-size: 12px; color: var(--text-sub);">
+                ${item.spec || ''} · 📍 ${SPACES[item.space]?.name || '수납'} > ${item.subLocation}
+              </div>
+            </div>
+          </div>
+          <button class="btn-quick-buy" onclick="completePurchase('${item.id}')">
+            구매완료
+          </button>
+        </div>
+      `).join('')}
+    `;
+  }
+
+  // Actions
+  function cycleStatus(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    if (item.type === 'keep') {
+      showToast('📦 보관용 물품입니다');
+      return;
+    }
+
+    if (item.status === 'plenty') {
+      item.status = 'medium';
+      item.inCart = false;
+      showToast(`🟡 '${item.name}' 보통 상태로 변경`);
+    } else if (item.status === 'medium') {
+      item.status = 'low';
+      item.inCart = true;
+      showToast(`🔴 '${item.name}' 부족함! 장보기에 자동 담김`);
+    } else if (item.status === 'low') {
+      item.status = 'empty';
+      item.inCart = true;
+      showToast(`⛔ '${item.name}' 소진 상태! 장보기에 담김`);
+    } else {
+      item.status = 'plenty';
+      item.inCart = false;
+      showToast(`🟢 '${item.name}' 넉넉함으로 충전 완료`);
+    }
+
+    saveItems();
+    render();
+  }
+
+  function toggleCart(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    item.inCart = !item.inCart;
+    if (item.inCart) {
+      showToast(`🛒 '${item.name}' 장보기 목록에 추가`);
+    } else {
+      if (item.status === 'low' || item.status === 'empty') item.status = 'medium';
+      showToast(`장보기에서 제외되었습니다`);
+    }
+
+    saveItems();
+    render();
+  }
+
+  function completePurchase(id) {
+    const item = items.find(i => i.id === id);
+    if (!item) return;
+
+    item.status = 'plenty';
+    item.inCart = false;
+    showToast(`🎉 '${item.name}' 구매 완료! 넉넉함으로 채웠어요`);
+    saveItems();
+    render();
+  }
+
+  function filterBySpace(spaceKey) {
+    activeTab = 'inventory';
+    activeFilter = spaceKey;
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === spaceKey);
+    });
+    document.querySelectorAll('.nav-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === 'inventory');
+    });
+    render();
+  }
+
+  function viewSpaceItems(spaceKey) {
+    filterBySpace(spaceKey);
+    showToast(`📍 ${SPACES[spaceKey].name}에 보관된 물건들이에요`);
+  }
+
+  // Modal Controls
+  function openAddModal() {
+    document.getElementById('addModal').style.display = 'flex';
+    document.getElementById('formName').focus();
+  }
+
+  function closeAddModal() {
+    document.getElementById('addModal').style.display = 'none';
+    document.getElementById('addItemForm').reset();
+  }
+
+  // Event Listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    render();
+
+    // Tabs
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        activeTab = tab.dataset.tab;
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        render();
+      });
+    });
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        activeFilter = pill.dataset.filter;
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        render();
+      });
+    });
+
+    // Search
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      searchClear.style.display = searchQuery ? 'block' : 'none';
+      render();
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      searchClear.style.display = 'none';
+      render();
+    });
+
+    // Modal
+    document.getElementById('openAddModalBtn').addEventListener('click', openAddModal);
+    document.getElementById('closeAddModalBtn').addEventListener('click', closeAddModal);
+    document.getElementById('addModal').addEventListener('click', (e) => {
+      if (e.target.id === 'addModal') closeAddModal();
+    });
+
+    // Form Submit
+    document.getElementById('addItemForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('formName').value.trim();
+      const space = document.getElementById('formSpace').value;
+      const subLocation = document.getElementById('formSubLocation').value.trim();
+      const type = document.getElementById('formType').value;
+      const status = document.getElementById('formStatus').value;
+      const spec = document.getElementById('formSpec').value.trim();
+      const memo = document.getElementById('formMemo').value.trim();
+
+      const newItem = {
+        id: 'item-' + Date.now(),
+        name,
+        space,
+        subLocation,
+        type,
+        status,
+        spec,
+        memo,
+        inCart: (status === 'low' || status === 'empty')
+      };
+
+      items.unshift(newItem);
+      saveItems();
+      closeAddModal();
+      showToast(`✨ '${name}' 물건이 등록되었어요!`);
+      render();
+    });
+  });
+</script>
+
+</body>
+</html>
