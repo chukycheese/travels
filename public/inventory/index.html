@@ -946,6 +946,10 @@
       <div class="form-group">
         <label class="form-label">세부 수납 위치 *</label>
         <input type="text" id="formSubLocation" class="form-input" placeholder="예: 2층 선반 B박스, 하부장 1번 서랍" required>
+        <div class="quick-slot-section" id="quickSlotSection">
+          <div class="quick-slot-label">💡 추천 수납 위치 원터치 선택:</div>
+          <div class="quick-slot-chips" id="quickSlotChips"></div>
+        </div>
       </div>
 
       <div class="form-row">
@@ -1135,14 +1139,223 @@
   ];
 
   const SPACES = {
-    pantry: { name: "팬트리", icon: "🥫", desc: "식료품, 생활소모품, 비상 잡화" },
-    kitchen: { name: "주방", icon: "🍳", desc: "조리도구, 양념, 세제, 위생백" },
-    dressroom: { name: "드레스룸", icon: "👔", desc: "의류, 침구, 압축팩, 캐리어" },
-    bath: { name: "욕실", icon: "🛁", desc: "수건, 치약, 샴푸, 바디워시, 욕실세제" },
-    bedroom: { name: "침실 (안방)", icon: "🛏️", desc: "침구, 협탁 서랍, 가습기, 수면용품" },
-    utility: { name: "다용도실", icon: "🧺", desc: "세탁기, 건조기, 공구함, 청소도구" },
-    study: { name: "서재", icon: "💻", desc: "전자기기, 케이블, 서류, 책" },
-    etc: { name: "현관/기타", icon: "🚪", desc: "신발, 우산, 레저용품" }
+    bedroom: {
+      name: "침실 (안방)",
+      icon: "🛏️",
+      desc: "수지 하우스 안방 실측 레이아웃 완료 (5대 가구 · 21개 수납 구역)",
+      statusBadge: "✨ 실측 배치 완료",
+      clusters: [
+        {
+          id: "closet",
+          name: "🚪 붙박이장 (2칸)",
+          desc: "통이불장 1칸 + 상부 겨울 외투 행거 & 하부 3단 서랍장 1칸",
+          slots: [
+            { id: "b-c-1", name: "붙박이장 1번 칸 (통이불장)", role: "계절 이불, 구스다운, 여분 패드·토퍼" },
+            { id: "b-c-2-top", name: "붙박이장 2번 칸 상부 (행거)", role: "롱패딩, 코트 등 두꺼운 겨울 외투" },
+            { id: "b-c-2-d1", name: "붙박이장 2번 칸 하부 서랍 1단", role: "두꺼운 니트, 가디건류" },
+            { id: "b-c-2-d2", name: "붙박이장 2번 칸 하부 서랍 2단", role: "방한 소품 (목도리, 털모자, 장갑)" },
+            { id: "b-c-2-d3", name: "붙박이장 2번 칸 하부 서랍 3단", role: "겨울 기모 바지, 홈웨어" }
+          ]
+        },
+        {
+          id: "chest",
+          name: "🗄️ 6칸 서랍장",
+          desc: "속옷, 양말, 잠옷, 실내복, 티셔츠 등 접는 데일리 의류",
+          slots: [
+            { id: "b-ch-1", name: "6칸 서랍장 1번 서랍", role: "속옷, 이너웨어" },
+            { id: "b-ch-2", name: "6칸 서랍장 2번 서랍", role: "양말, 스타킹" },
+            { id: "b-ch-3", name: "6칸 서랍장 3번 서랍", role: "잠옷, 룸웨어" },
+            { id: "b-ch-4", name: "6칸 서랍장 4번 서랍", role: "데일리 반팔/긴팔 티셔츠" },
+            { id: "b-ch-5", name: "6칸 서랍장 5번 서랍", role: "맨투맨, 얇은 니트" },
+            { id: "b-ch-6", name: "6칸 서랍장 6번 서랍", role: "운동복, 레깅스, 츄리닝" }
+          ]
+        },
+        {
+          id: "bed-sliding",
+          name: "🛏️ 침대 슬라이딩 서랍 (4칸)",
+          desc: "측면 레일 개폐 · 평소 상시 꺼내 쓰는 데일리 침구/패브릭",
+          slots: [
+            { id: "b-bs-1", name: "침대 슬라이딩 서랍 1번", role: "자주 교체하는 베개커버, 베개시트" },
+            { id: "b-bs-2", name: "침대 슬라이딩 서랍 2번", role: "매트리스 패드, 침대 시트 여분" },
+            { id: "b-bs-3", name: "침대 슬라이딩 서랍 3번", role: "얇은 무릎담요, 거실용 블랭킷" },
+            { id: "b-bs-4", name: "침대 슬라이딩 서랍 4번", role: "여분 수건, 룸슈즈" }
+          ]
+        },
+        {
+          id: "bed-bunker",
+          name: "📦 침대 하부 벙커 (4칸)",
+          desc: "매트리스 젖혀서 접근 · 1년에 1~2번 여는 완전 장기 보관품",
+          slots: [
+            { id: "b-bb-1", name: "침대 하부 벙커 1번 (헤드 좌)", role: "계절 지난 압축팩 이불" },
+            { id: "b-bb-2", name: "침대 하부 벙커 2번 (헤드 우)", role: "대형 여행 캐리어, 레저 가방" },
+            { id: "b-bb-3", name: "침대 하부 벙커 3번 (풋 좌)", role: "안 쓰는 리빙박스, 온수매트/전기요" },
+            { id: "b-bb-4", name: "침대 하부 벙커 4번 (풋 우)", role: "계절 가전 (선풍기, 서큘레이터 박스)" }
+          ]
+        },
+        {
+          id: "nightstand",
+          name: "🌙 침실 협탁",
+          desc: "취침 전후 손이 바로 닿는 데일리 소품",
+          slots: [
+            { id: "b-ns-1", name: "침실 협탁 1번째 서랍", role: "안경, 충전 케이블, 수면안대, 상비약" },
+            { id: "b-ns-2", name: "침실 협탁 2번째 서랍", role: "온습도계, 가습기 필터" }
+          ]
+        }
+      ]
+    },
+    pantry: {
+      name: "팬트리",
+      icon: "🥫",
+      desc: "식료품, 생활소모품, 비상 잡화",
+      statusBadge: "3개 구역",
+      clusters: [
+        {
+          id: "p-floor",
+          name: "📦 팬트리 바닥층",
+          desc: "부피 크고 무거운 대형 보관함",
+          slots: [
+            { id: "p-1", name: "1층 바닥 대형 수납함", role: "화장지 30롤 번들, 생수" }
+          ]
+        },
+        {
+          id: "p-shelf",
+          name: "🪜 팬트리 선반 타워",
+          desc: "카테고리별 소분 바구니",
+          slots: [
+            { id: "p-2", name: "2층 선반 B박스 (여행용품)", role: "멀티어댑터, 돼지코, 파우치" },
+            { id: "p-3", name: "2층 선반 B박스 (공구/잡화)", role: "건전지, 테이프, 접착제" }
+          ]
+        }
+      ]
+    },
+    kitchen: {
+      name: "주방",
+      icon: "🍳",
+      desc: "수지 하우스 주방 실측 라인업 (냉장고장 · 싱크대 · 인덕션 · 아일랜드)",
+      statusBadge: "✨ 4대 라인업 배치",
+      clusters: [
+        {
+          id: "k-fridge",
+          name: "❄️ 냉장고 & 냉장고 상부장",
+          desc: "냉장·냉동실 및 손 닿기 어려운 최상단 장기 보관장",
+          slots: [
+            { id: "k-fr-top", name: "냉장고 상부장", role: "명절 제사용품, 대형 냄비, 여분 키친타올 (장기 보관 · 세부 칸 사진 판정 대기 📷)" },
+            { id: "k-fr-main", name: "냉장고 (냉장실)", role: "반찬, 신선식품, 소스류, 유제품" },
+            { id: "k-fr-freezer", name: "냉장고 (냉동실)", role: "냉동식품, 건어물, 냉동육/생선" }
+          ]
+        },
+        {
+          id: "k-sink",
+          name: "🚰 싱크대 라인 (상하부장)",
+          desc: "식기류 세척 및 주방 위생소모품 수납",
+          slots: [
+            { id: "k-sink-top", name: "싱크대 상부장", role: "매일 쓰는 식기류, 밥/국그릇, 접시, 유리컵/머그잔 (세부 선반 사진 판정 대기 📷)" },
+            { id: "k-sink-bot-rail", name: "싱크대 하부장 우측 2단 레일", role: "종량제 봉투 20L, 위생백, 비닐장갑" },
+            { id: "k-sink-bot-basket", name: "싱크대 하부장 1번 바구니", role: "주방세제 리필, 고무장갑, 수세미" }
+          ]
+        },
+        {
+          id: "k-induction",
+          name: "🍳 인덕션 라인 (상하부장)",
+          desc: "가열 조리도구 및 조미료/양념 수납",
+          slots: [
+            { id: "k-ind-top", name: "인덕션 상부장", role: "자주 쓰는 양념통, 소금/설탕, 조미료, 오일류 (세부 칸 사진 판정 대기 📷)" },
+            { id: "k-ind-bot", name: "인덕션 하부장", role: "프라이팬, 냄비, 웍, 조리도구(뒤집개/국자), 뚝배기 (세부 서랍 사진 판정 대기 📷)" }
+          ]
+        },
+        {
+          id: "k-island",
+          name: "🏝️ 아일랜드 하부장",
+          desc: "소형 주방가전(밥솥/에프) 및 홈카페/밀폐용기 수납",
+          slots: [
+            { id: "k-isl-appliance", name: "아일랜드 슬라이드 레일장", role: "전기밥솥, 에어프라이어, 토스터" },
+            { id: "k-isl-drawers", name: "아일랜드 서랍/수납칸", role: "밀폐용기, 텀블러, 네스프레소 캡슐, 티백 (세부 칸 사진 판정 대기 📷)" }
+          ]
+        }
+      ]
+    },
+    dressroom: {
+      name: "드레스룸",
+      icon: "👔",
+      desc: "의류, 침구, 압축팩, 캐리어",
+      statusBadge: "1개 구역",
+      clusters: [
+        {
+          id: "d-closet",
+          name: "👗 드레스룸 붙박이장",
+          desc: "계절 의류 및 압축팩 보관",
+          slots: [
+            { id: "d-1", name: "붙박이장 상단 선반 1번", role: "겨울 구스다운 압축팩" }
+          ]
+        }
+      ]
+    },
+    bath: {
+      name: "욕실",
+      icon: "🛁",
+      desc: "수건, 치약, 샴푸, 바디워시, 욕실세제",
+      statusBadge: "2개 구역",
+      clusters: [
+        {
+          id: "ba-mirror",
+          name: "🪞 슬라이딩 거울장",
+          desc: "욕실 상부 거울 수납장",
+          slots: [
+            { id: "ba-1", name: "욕실 슬라이딩 거울장 1단", role: "헤어 트리트먼트, 스킨케어" },
+            { id: "ba-2", name: "욕실 슬라이딩 거울장 2단", role: "센소다인 치약, 여분 칫솔" }
+          ]
+        }
+      ]
+    },
+    utility: {
+      name: "다용도실",
+      icon: "🧺",
+      desc: "세탁기, 건조기, 공구함, 청소도구",
+      statusBadge: "2개 구역",
+      clusters: [
+        {
+          id: "u-washer",
+          name: "🧼 세탁기 & 타워 선반",
+          desc: "세탁 세제 및 공구함",
+          slots: [
+            { id: "u-1", name: "세탁기 위 상부 철제선반", role: "보쉬 전동드릴 & 공구함" },
+            { id: "u-2", name: "건조기 옆 슬림 수납타워 1층", role: "캡슐세제, 섬유유연제" }
+          ]
+        }
+      ]
+    },
+    study: {
+      name: "서재",
+      icon: "💻",
+      desc: "전자기기, 케이블, 서류, 책",
+      statusBadge: "1개 구역",
+      clusters: [
+        {
+          id: "s-desk",
+          name: "🖥️ 책상 서랍",
+          desc: "전산 소품 및 케이블",
+          slots: [
+            { id: "s-1", name: "책상 1번 서랍", role: "케이블, USB, 외장하드" }
+          ]
+        }
+      ]
+    },
+    etc: {
+      name: "현관/기타",
+      icon: "🚪",
+      desc: "신발, 우산, 레저용품",
+      statusBadge: "1개 구역",
+      clusters: [
+        {
+          id: "e-shoe",
+          name: "👞 신발장",
+          desc: "신발, 우산, 외출 잡화",
+          slots: [
+            { id: "e-1", name: "신발장 중앙 틈새 선반", role: "차키, 외출용 마스크" }
+          ]
+        }
+      ]
+    }
   };
 
   // State
@@ -1337,31 +1550,64 @@
     }).join('');
   }
 
-  function renderSpaceMap(container) {
-    const spaceKeys = Object.keys(SPACES);
+  let activeSpaceDetail = 'bedroom'; // Default to bedroom to immediately showcase layout!
 
+  function openSpaceDetail(spaceKey) {
+    activeSpaceDetail = spaceKey;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeSpaceDetail() {
+    activeSpaceDetail = null;
+    render();
+  }
+
+  function renderSpaceMap(container) {
+    if (activeSpaceDetail && SPACES[activeSpaceDetail]) {
+      renderSingleSpaceDetail(container, activeSpaceDetail);
+      return;
+    }
+
+    const spaceKeys = Object.keys(SPACES);
     container.innerHTML = `
+      <div style="background: #fdfbf7; border: 1px solid #e8e6dc; border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="font-size: 13px; color: var(--text-main); font-weight: 600;">
+          💡 공간을 클릭하면 <strong>세부 가구 & 수납칸 배치도</strong>를 볼 수 있어요
+        </div>
+      </div>
       <div class="space-grid">
         ${spaceKeys.map(key => {
           const space = SPACES[key];
           const spaceItems = items.filter(i => i.space === key);
-          const topLocations = [...new Set(spaceItems.map(i => i.subLocation.split('(')[0].trim()))].slice(0, 3);
+          const totalSlots = space.clusters ? space.clusters.reduce((acc, c) => acc + c.slots.length, 0) : 0;
+          const clusterSummary = space.clusters ? space.clusters.map(c => c.name.split('(')[0].trim()).join(' · ') : '';
 
           return `
-            <div class="space-card" onclick="viewSpaceItems('${key}')">
+            <div class="space-card" onclick="openSpaceDetail('${key}')" style="cursor: pointer;">
               <div class="space-header">
                 <div class="space-name">
                   <span>${space.icon}</span>
                   <span>${space.name}</span>
                 </div>
-                <span class="space-item-count">${spaceItems.length}개</span>
+                <div style="display: flex; gap: 6px; align-items: center;">
+                  ${space.statusBadge ? `<span class="space-status-badge">${space.statusBadge}</span>` : ''}
+                  <span class="space-item-count">${spaceItems.length}개</span>
+                </div>
+              </div>
+              <div style="font-size: 11.5px; color: var(--primary); font-weight: 700; margin-bottom: 6px;">
+                📐 ${totalSlots > 0 ? `${totalSlots}개 수납 구역 배치` : '수납 구역 미배치'}
               </div>
               <div class="space-slots">
-                ${topLocations.length > 0 ? topLocations.map(loc => `
+                ${space.clusters ? space.clusters.map(c => `
                   <div class="space-slot-item">
-                    <span>• ${loc}</span>
+                    <span>• <strong>${c.name}</strong> (${c.slots.length}칸)</span>
                   </div>
-                `).join('') : '<div class="space-slot-item" style="color:#b5baa8;">등록된 물건 없음</div>'}
+                `).join('') : '<div class="space-slot-item" style="color:#b5baa8;">등록된 구역 없음</div>'}
+              </div>
+              <div style="margin-top: 10px; padding-top: 8px; border-top: 1px dashed var(--border); font-size: 11.5px; color: var(--text-sub); display: flex; justify-content: space-between; align-items: center;">
+                <span>클릭해서 배치도 열기</span>
+                <span style="font-weight: 800; color: var(--primary);">➔</span>
               </div>
             </div>
           `;
@@ -1370,6 +1616,126 @@
     `;
   }
 
+  function renderSingleSpaceDetail(container, spaceKey) {
+    const space = SPACES[spaceKey];
+    const spaceItems = items.filter(i => i.space === spaceKey);
+    const totalSlots = space.clusters ? space.clusters.reduce((acc, c) => acc + c.slots.length, 0) : 0;
+
+    container.innerHTML = `
+      <div class="space-detail-header">
+        <button class="btn-back-spaces" onclick="closeSpaceDetail()">
+          <span>←</span> <span>전체 공간 목록으로 돌아가기</span>
+        </button>
+        <div class="space-detail-title-row">
+          <div>
+            <div class="space-detail-title">
+              <span>${space.icon}</span>
+              <span>${space.name} 수납 지도</span>
+              ${space.statusBadge ? `<span class="space-status-badge">${space.statusBadge}</span>` : ''}
+            </div>
+            <div class="space-detail-sub">${space.desc}</div>
+          </div>
+          <div class="space-detail-actions">
+            <button class="btn-space-action secondary" onclick="viewSpaceItems('${spaceKey}')">
+              📦 보관 물건 보기 (${spaceItems.length}개)
+            </button>
+            <button class="btn-space-action" onclick="openAddModalWithSlot('${spaceKey}', '')">
+              + 새 물건 등록
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cluster-list">
+        ${space.clusters ? space.clusters.map(cluster => `
+          <div class="cluster-card">
+            <div class="cluster-head">
+              <div class="cluster-title">
+                <span>${cluster.name}</span>
+                <span style="font-size: 12px; font-weight: 700; color: var(--primary);">${cluster.slots.length}칸</span>
+              </div>
+              <div class="cluster-desc">${cluster.desc}</div>
+            </div>
+            <div class="slot-grid">
+              ${cluster.slots.map(slot => {
+                const matchedItems = spaceItems.filter(item => 
+                  item.subLocation.includes(slot.name) || slot.name.includes(item.subLocation)
+                );
+
+                return `
+                  <div class="slot-item">
+                    <div class="slot-info">
+                      <div class="slot-name">
+                        <span>📍 ${slot.name}</span>
+                        ${matchedItems.length > 0 ? `<span style="font-size: 11px; color: var(--primary); font-weight: 800;">(${matchedItems.length}개)</span>` : ''}
+                      </div>
+                      <div class="slot-role">💡 용도: ${slot.role}</div>
+                      ${matchedItems.length > 0 ? `
+                        <div class="slot-items-list">
+                          ${matchedItems.map(item => `
+                            <span class="slot-item-chip">
+                              ${item.name} (${item.status === 'plenty' ? '🟢' : item.status === 'medium' ? '🟡' : item.status === 'low' ? '🔴' : '📦'})
+                            </span>
+                          `).join('')}
+                        </div>
+                      ` : `
+                        <div style="margin-top: 4px;">
+                          <span class="slot-empty-tag">비어 있음 · 사진 대기 중 📷</span>
+                        </div>
+                      `}
+                    </div>
+                    <button class="btn-add-to-slot" onclick="openAddModalWithSlot('${spaceKey}', '${slot.name.replace(/'/g, "\\'")}')">
+                      + 등록
+                    </button>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `).join('') : '<div style="padding: 20px; text-align: center; color: var(--text-sub);">세부 수납 구역 정보가 없습니다.</div>'}
+      </div>
+    `;
+  }
+
+  function openAddModalWithSlot(spaceKey, slotName) {
+    openAddModal();
+    const spaceSelect = document.getElementById('formSpace');
+    if (spaceSelect) {
+      spaceSelect.value = spaceKey;
+      updateQuickSlotChips(spaceKey);
+    }
+    const subLocInput = document.getElementById('formSubLocation');
+    if (subLocInput && slotName) {
+      subLocInput.value = slotName;
+    }
+  }
+
+  function updateQuickSlotChips(spaceKey) {
+    const chipsContainer = document.getElementById('quickSlotChips');
+    if (!chipsContainer) return;
+
+    const space = SPACES[spaceKey];
+    if (!space || !space.clusters) {
+      chipsContainer.innerHTML = '<span style="font-size:11px; color:#a4aaa0;">등록된 추천 슬롯 없음</span>';
+      return;
+    }
+
+    const allSlots = space.clusters.flatMap(c => c.slots);
+    chipsContainer.innerHTML = allSlots.map(slot => `
+      <button type="button" class="quick-chip" onclick="selectQuickSlot('${slot.name.replace(/'/g, "\\'")}')">
+        ${slot.name}
+      </button>
+    `).join('');
+  }
+
+  function selectQuickSlot(slotName) {
+    const subLocInput = document.getElementById('formSubLocation');
+    if (subLocInput) {
+      subLocInput.value = slotName;
+      showToast(`📍 '${slotName}' 선택 완료!`);
+    }
+  }
+  
   function renderShoppingList(container) {
     const cartItems = items.filter(i => (i.inCart || i.status === 'low' || i.status === 'empty') && i.status !== 'hold' && i.status !== 'discontinue');
     document.getElementById('itemCount').textContent = cartItems.length + '개';
@@ -1523,6 +1889,13 @@
 
   // Event Listeners
   document.addEventListener('DOMContentLoaded', () => {
+    const formSpaceSelect = document.getElementById('formSpace');
+    if (formSpaceSelect) {
+      formSpaceSelect.addEventListener('change', (e) => {
+        updateQuickSlotChips(e.target.value);
+      });
+      updateQuickSlotChips(formSpaceSelect.value);
+    }
     render();
 
     // Tabs
